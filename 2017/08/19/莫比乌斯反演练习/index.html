@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>莫比乌斯反演练习 - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2017-08-19 01:37">
+                    星期六, 八月 19日 2017, 1:37 凌晨
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1695" target="_blank" rel="noopener">HDU - 1695 : GCD</a></p>
+<p><a href="http://codeforces.com/problemset/problem/235/E" target="_blank" rel="noopener">CodeForces - 235E : Number Challenge</a></p>
+<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2154" target="_blank" rel="noopener">BZOJ 2154: Crash的数字表格</a></p>
+<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3529" target="_blank" rel="noopener">BZOJ 3529: [Sdoi2014]数表</a></p>
+<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2440" target="_blank" rel="noopener">BZOJ 2440: [中山市选2011]完全平方数</a></p>
+<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=2301" target="_blank" rel="noopener">BZOJ 2301: [HAOI2011]Problem b</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4746" target="_blank" rel="noopener">HDU - 4746 : Mophues</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5212" target="_blank" rel="noopener">HDU - 5212 : Code</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5321" target="_blank" rel="noopener">HDU - 5321 : Beautiful Set</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4947" target="_blank" rel="noopener">HDU - 4947 : GCD Array</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5663" target="_blank" rel="noopener">HDU - 5663 : Hillan and the girl</a></p>
+<p><a href="http://acm.uestc.edu.cn/#/problem/show/811" target="_blank" rel="noopener">UESTC - 811 : GCD</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5656" target="_blank" rel="noopener">HDU - 5656 : CA Loves GCD</a></p>
+<p><a href="http://acdream.info/problem?pid=1114" target="_blank" rel="noopener">ACdream - 1114 : Number theory</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5468" target="_blank" rel="noopener">HDU - 5468 : Puzzled Elena</a></p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2841" target="_blank" rel="noopener">HDU - 2841 :  Visible Trees</a></p>
+<p><a href="http://poj.org/problem?id=3904" target="_blank" rel="noopener">POJ - 3904 : Sky Code</a></p>
+<a id="more"></a>
+
+<p>莫比乌斯反演式：</p>
+<p>$\sum_{d|n} u(d) = [n=1]$  ，其中$d = \prod_{i=1}^{k} p_i^{e_i}$ ，$u(d)$ 为莫比乌斯函数，见下式<br>$$<br>u(d)=<br>\begin{cases}<br>1      &amp;{d=1}\\<br>0      &amp;{\exists e_i &gt; 1}\\<br>(-1)^k     &amp;{\forall e_i=1}\\<br>\end{cases}<br>$$</p>
+<h2 id="HDU-1695-GCD"><a href="#HDU-1695-GCD" class="headerlink" title="HDU - 1695 : GCD"></a>HDU - 1695 : GCD</h2><blockquote>
+<p>题目大意：$T$ 次询问，求$1 \leqslant x \leqslant b,1 \leqslant y \leqslant d$ 的所有$gcd(x,y)=k$ 的个数，$(x_0,y_0)$ 与$(y_0,x_0)$ 被视作一样。</p>
+</blockquote>
+<h3 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h3><p>设$g(k)=\sum_{i=1}^b\sum_{j=1}^d[gcd(i,j)=k],f(n)=\sum_{n|k}g(k)$ </p>
+<p>$f(n)$ 的意义为$gcd(i,j)$ 能被$n$ 整除的且符合条件的点对个数</p>
+<p>设$n\leqslant m$ ，则$f(n)= \frac{ \lfloor \frac{b}{n} \rfloor (\lfloor \frac{b}{n} \rfloor+1)}{2}+ \lfloor \frac{b}{n} \rfloor(\lfloor \frac{d}{n} \rfloor-\lfloor \frac{b}{n} \rfloor)$ 。</p>
+<p>故$g(n)=\sum_{n|k}u(\frac{k}{n})f(k)$ 代入即可求得。</p>
+<p>复杂度$O(Tn)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">100005</span>;
+<span class="hljs-keyword">int</span> p[N],vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,tot,u[N]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])&#123;
+            p[tot++]=i;
+            u[i]=<span class="hljs-number">-1</span>;
+        &#125;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;tot&amp;&amp;i*p[j]&lt;n;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)&#123;
+                u[i*p[j]]=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;<span class="hljs-keyword">else</span> u[i*p[j]]=-u[i];
+        &#125;
+    &#125;
+&#125;
+ll T,a,b,c,d,k;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(N);
+    <span class="hljs-built_in">cin</span>&gt;&gt;T;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> t=<span class="hljs-number">1</span>;t&lt;=T;++t)&#123;
+        <span class="hljs-built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d&gt;&gt;k;
+        ll ans=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">if</span>(!k)&#123;
+            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Case "</span>&lt;&lt;t&lt;&lt;<span class="hljs-string">": "</span>&lt;&lt;ans&lt;&lt;<span class="hljs-string">"\n"</span>;
+            <span class="hljs-keyword">continue</span>;
+        &#125;
+        <span class="hljs-keyword">if</span>(b&gt;d)swap(b,d);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=k;i&lt;=b;i+=k)&#123;
+            ll x=b/i,y=d/i;
+            ans+=u[i/k]*(x*(x+<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>+x*(y-x));
+        &#125;
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Case "</span>&lt;&lt;t&lt;&lt;<span class="hljs-string">": "</span>&lt;&lt;ans&lt;&lt;<span class="hljs-string">"\n"</span>;
+    &#125;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="CodeForces-235E-Number-Challenge"><a href="#CodeForces-235E-Number-Challenge" class="headerlink" title="CodeForces - 235E : Number Challenge"></a>CodeForces - 235E : Number Challenge</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="BZOJ-2154-Crash的数字表格"><a href="#BZOJ-2154-Crash的数字表格" class="headerlink" title="BZOJ 2154: Crash的数字表格"></a>BZOJ 2154: Crash的数字表格</h2><blockquote>
+<p>题目大意：求$\sum_{i=1}^n\sum_{j=1}^mlcm(i,j)$ 。</p>
+</blockquote>
+<h3 id="莫比乌斯反演-1"><a href="#莫比乌斯反演-1" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h3><p>$$<br>f(n,m)=\sum_{i=1}^n\sum_{j=1}^m[i,j]<br>=\sum_{i=1}^n\sum_{j=1}^m\frac{i\times j}{(i,j)}\\<br>=\sum_{d=1}^{min(n,m)}\sum_{i=1}^n\sum_{j=1}^m\frac{i\times j}{(i,j)}[(i,j)=d]\\<br>=\sum_{d=1}^{min(n,m)}\sum_{i=1}^{\lfloor \frac{n}{d}\rfloor}\sum_{j=1}^{\lfloor\frac{m}{d}\rfloor}i\times j\times d[(i,j)=1]\\<br>=\sum_{d=1}^{min(n,m)}d\sum_{i=1}^{\lfloor \frac{n}{d}\rfloor}\sum_{j=1}^{\lfloor\frac{m}{d}\rfloor}i\times j[(i,j)=1]\\<br>$$</p>
+<p>设$g(n,m)=\sum_{i=1}^n\sum_{j=1}^mi\times j[(i,j)=1]$ ，则有<br>$$<br>g(n,m)=\sum_{d=1}^{min(n,m)}u(d)\sum_{i=1}^{\lfloor \frac{n}{d} \rfloor}\sum_{j=1}^{\lfloor \frac{m}{d} \rfloor}i\times j\times d^2\\<br>=\sum_{d=1}^{min(n,m)}u(d)d^2\sum_{i=1}^{\lfloor \frac{n}{d} \rfloor}\sum_{j=1}^{\lfloor \frac{m}{d} \rfloor}i\times j\\<br>=\sum_{d=1}^{min(n,m)}u(d)d^2\times \frac{(\lfloor \frac{n}{d} \rfloor+1)\lfloor \frac{n}{d} \rfloor}{2}\times \frac{(\lfloor \frac{m}{d} \rfloor+1)\lfloor \frac{m}{d} \rfloor}{2}\\<br>$$</p>
+<p>$$<br>\therefore f(n,m)=\sum_{d=1}^{min(n,m)}d\times g(\lfloor \frac{n}{d}\rfloor,\lfloor \frac{m}{d}\rfloor)<br>$$</p>
+<p>求$f(n,m)$ 和$g(n,m)$ 的复杂度均为$O(\sqrt{n})$ ，总复杂度为$O(n)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">1e7</span>+<span class="hljs-number">5</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> P=<span class="hljs-number">20101009</span>;
+<span class="hljs-keyword">int</span> p[N],k,pre[N];
+<span class="hljs-keyword">char</span> mu[N]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;;
+<span class="hljs-keyword">bool</span> vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])&#123;
+            mu[i]=<span class="hljs-number">-1</span>;
+            p[k++]=i;
+        &#125;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;p[j]*i&lt;n;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)&#123;
+                mu[i*p[j]]=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;<span class="hljs-keyword">else</span> mu[i*p[j]]=-mu[i];
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;++i)
+        pre[i]=((pre[i<span class="hljs-number">-1</span>]+(ll)mu[i]*i*i%P)%P+P)%P;
+&#125;
+<span class="hljs-keyword">int</span> n,m;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Min</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span></span>&#123;<span class="hljs-keyword">return</span> a&lt;b?a:b;&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span></span>&#123;<span class="hljs-keyword">return</span> a&gt;b?a:b;&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">g</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n,<span class="hljs-keyword">int</span> m)</span></span>&#123;
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>,d,td,len=Min(n,m);
+    <span class="hljs-keyword">for</span>(d=<span class="hljs-number">1</span>;d&lt;=len;d=td+<span class="hljs-number">1</span>)&#123;
+        td=Min(n/(n/d),m/(m/d));
+        ll temp=(((pre[td]-pre[d<span class="hljs-number">-1</span>])%P*((<span class="hljs-number">1L</span>L*(n/d+<span class="hljs-number">1</span>)*(n/d)/<span class="hljs-number">2</span>)%P))%P*((<span class="hljs-number">1L</span>L*(m/d+<span class="hljs-number">1</span>)*(m/d)/<span class="hljs-number">2</span>)%P))%P;
+        ans=((ans+temp)%P+P)%P;
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n,<span class="hljs-keyword">int</span> m)</span></span>&#123;
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">0</span>,d,td,len=Min(n,m);
+    <span class="hljs-keyword">for</span>(d=<span class="hljs-number">1</span>;d&lt;=len;d=td+<span class="hljs-number">1</span>)&#123;
+        td=Min(n/(n/d),m/(m/d));
+        ll temp=<span class="hljs-number">1L</span>L*(td+d)*(td-d+<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>%P*g(n/d,m/d)%P;
+        ans=((ans+temp)%P+P)%P;
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(N);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,f(n,m));
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="BZOJ-3529-Sdoi2014-数表"><a href="#BZOJ-3529-Sdoi2014-数表" class="headerlink" title="BZOJ 3529: [Sdoi2014]数表"></a>BZOJ 3529: [Sdoi2014]数表</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="BZOJ-2440-中山市选2011-完全平方数"><a href="#BZOJ-2440-中山市选2011-完全平方数" class="headerlink" title="BZOJ 2440: [中山市选2011]完全平方数"></a>BZOJ 2440: [中山市选2011]完全平方数</h2><blockquote>
+<p>题目大意：求第$K$ 个非平方数的倍数的数。</p>
+</blockquote>
+<h3 id="二分-容斥-莫比乌斯函数"><a href="#二分-容斥-莫比乌斯函数" class="headerlink" title="二分+容斥+莫比乌斯函数"></a>二分+容斥+莫比乌斯函数</h3><p>做这题前学习了下容斥原理：</p>
+<p>$|\bar{A_1} \cap \bar{A_2}\cap … \cap \bar{A_n}|=|S|-\sum|A_i|+\sum|A_i\cap A_j|+…+(-1)^n\sum|A_1\cap A_2 \cap … \cap A_n|$</p>
+<p>设$f(n)$ 是$n$ 个素数平方的倍数的数的个数，那么$f(0)=|S|-f(1)+f(2)+…+(-1)^nf(n)$ </p>
+<p>不难看出$f(x)$ 前的系数即为莫比乌斯函数$u(x)$ 。</p>
+<p>于是二分第$K$ 个数$x$ ，检验$f(x)$ 是否等于$K$ 即可。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">100005</span>;
+ll p[N],vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,k,mu[N]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ll n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])&#123;
+            p[k++]=i;
+            mu[i]=<span class="hljs-number">-1</span>;
+        &#125;
+        <span class="hljs-keyword">for</span>(ll j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;i*p[j]&lt;n;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)&#123;
+                mu[i*p[j]]=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;mu[i*p[j]]=-mu[i];
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">check</span><span class="hljs-params">(ll n)</span></span>&#123;
+    ll ans=n;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i*i&lt;=n;++i)
+        ans+=mu[i]*(n/(i*i));
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(N);
+    ll T,n,l,r,mid;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>,&amp;T);
+    <span class="hljs-keyword">while</span>(T--)&#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>,&amp;n);
+        l=<span class="hljs-number">1</span>,r=<span class="hljs-number">10000000000</span>;
+        <span class="hljs-keyword">while</span>(l&lt;r)&#123;
+            mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(check(mid)&lt;n)l=mid+<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">else</span> r=mid;
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,l);
+    &#125;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="BZOJ-2301-HAOI2011-Problem-b"><a href="#BZOJ-2301-HAOI2011-Problem-b" class="headerlink" title="BZOJ 2301: [HAOI2011]Problem b"></a>BZOJ 2301: [HAOI2011]Problem b</h2><blockquote>
+<p>题目大意：$T$ 次询问，每次询问有多少数对$(x,y)$ 满足$a\leqslant x \leqslant b,c\leqslant y \leqslant d$ 且$gcd(x,y)=k$ </p>
+</blockquote>
+<h3 id="莫比乌斯反演-2"><a href="#莫比乌斯反演-2" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h3><p>和上面HDU 1695类似，可求$1 \leqslant x \leqslant n,1 \leqslant y \leqslant m$ 且$gcd(x,y)=k$ 的点对有$F(n,m,k)$ 个。</p>
+<p>那么简单地容斥下，$a\leqslant x \leqslant b,c\leqslant y \leqslant d$ 且$gcd(x,y)=k$ 的点对就有$F(b,d,k)-F(a-1,d,k)-F(b,c-1,k)+F(a-1,c-1,k)$ 个。</p>
+<p>然而这道题的数据范围更大，用之前的方法直接暴力求不可行，采用分块优化。</p>
+<p>$\lfloor \frac{N}{d} \rfloor$ 的取值并不是连续的，其最多只有$2\lfloor \sqrt{N} \rfloor$ 种，同理$\lfloor \frac{M}{d} \rfloor$ 的取值最多$2\lfloor \sqrt{M} \rfloor$ 种。故$\lfloor \frac{N}{d} \rfloor$ 和$\lfloor \frac{M}{d} \rfloor$ 均相同的区间只有$2\lfloor \sqrt{N} \rfloor+2\lfloor \sqrt{M} \rfloor$ 个，所以$d$ 的枚举量其实是$O(\sqrt{N}+\sqrt{M})$ 的。</p>
+<p>复杂度$O(T\sqrt{n})$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">50005</span>;
+ll p[N],vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,tot,u[N]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,pre[N];
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])&#123;
+            p[tot++]=i;
+            u[i]=<span class="hljs-number">-1</span>;
+        &#125;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;tot&amp;&amp;i*p[j]&lt;n;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)&#123;
+                u[i*p[j]]=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;<span class="hljs-keyword">else</span> u[i*p[j]]=-u[i];
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;++i)
+        pre[i]=pre[i<span class="hljs-number">-1</span>]+u[i];
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">Min</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;
+    <span class="hljs-keyword">return</span> a&lt;b?a:b;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">solve</span><span class="hljs-params">(ll a,ll b,ll k)</span></span>&#123;
+    <span class="hljs-keyword">if</span>(!k)<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    ll ans=<span class="hljs-number">0</span>,l;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=Min(a,b);i=l+<span class="hljs-number">1</span>)&#123;
+        l=Min(a/(a/i),b/(b/i));
+        ans+=(pre[l]-pre[i<span class="hljs-number">-1</span>])*(a/i)*(b/i);
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+ll T,a,b,c,d,k;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(N);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>,&amp;T);
+    <span class="hljs-keyword">while</span>(T--)&#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%lld%lld%lld%lld"</span>,&amp;a,&amp;b,&amp;c,&amp;d,&amp;k);
+        ll ans=solve(b/k,d/k,k)-solve((a<span class="hljs-number">-1</span>)/k,d/k,k)-solve(b/k,(c<span class="hljs-number">-1</span>)/k,k)+solve((a<span class="hljs-number">-1</span>)/k,(c<span class="hljs-number">-1</span>)/k,k);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,ans);
+    &#125;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="HDU-4746-Mophues"><a href="#HDU-4746-Mophues" class="headerlink" title="HDU - 4746 : Mophues"></a>HDU - 4746 : Mophues</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="HDU-5212-Code"><a href="#HDU-5212-Code" class="headerlink" title="HDU - 5212 : Code"></a>HDU - 5212 : Code</h2><blockquote>
+<p>题目大意：求$f(n)=\sum_{i=1}^n\sum_{j=1}^n(a_i,a_j)[(a_i,a_j)-1]$ </p>
+</blockquote>
+<h3 id="莫比乌斯反演-3"><a href="#莫比乌斯反演-3" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h3><p>$$<br>f(n)=\sum_{i=1}^n\sum_{j=1}^n(a_i,a_j)[(a_i,a_j)-1]\\<br>=\sum_{d=1}^nd(d-1)\sum_{i=1}^n\sum_{j=1}^n[(a_i,a_j)=d]\\<br>设g(n,m)=\sum_{i=1}^n\sum_{j=1}^n[(a_i,a_j)=m]\\<br>=\sum_{i=1}^n\sum_{j=1}^n[\frac{(a_i,a_j)}{m}=1]\\<br>=\sum_{i=1}^n\sum_{j=1}^n\sum_{d|\frac{(a_i,a_j)}{m}}u(d)<br>$$</p>
+<p>设$h(d)$ 表示能被$d$ 整除的数的个数，则<br>$$<br>g(n,m)=\sum_{d=1}^{\frac{max(a_i)}{m}}u(d)h^2(md)\\<br>f(n)=\sum_{d=1}^nd(d-1)\times g(n,d)<br>$$<br>复杂度$O(nlogn)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">10005</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> P=<span class="hljs-number">10007</span>;
+ll p[N],vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,k,mu[N]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;;
+ll n,a[N],h[N],t;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ll n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])&#123;
+            mu[i]=<span class="hljs-number">-1</span>;
+            p[k++]=i;
+        &#125;
+        <span class="hljs-keyword">for</span>(ll j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;p[j]*i&lt;n;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)&#123;
+                mu[i*p[j]]=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;<span class="hljs-keyword">else</span> mu[i*p[j]]=-mu[i];
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">g</span><span class="hljs-params">(ll n,ll m)</span></span>&#123;
+    ll ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(ll d=<span class="hljs-number">1</span>;d&lt;=<span class="hljs-number">10000</span>/m;++d)
+        ans=(ans+mu[d]*h[m*d]*h[m*d])%P;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">f</span><span class="hljs-params">(ll n)</span></span>&#123;
+    ll ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(ll d=<span class="hljs-number">1</span>;d&lt;=<span class="hljs-number">10000</span>;++d)
+        ans=(ans+d*(d<span class="hljs-number">-1</span>)*g(n,d))%P;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(N);
+    <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%I64d"</span>,&amp;n))&#123;
+        <span class="hljs-built_in">memset</span>(a,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(a));
+        <span class="hljs-built_in">memset</span>(h,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(h));
+        <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">0</span>;i&lt;n;++i)&#123;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%I64d"</span>,&amp;t);
+            a[t]++;
+        &#125;
+        <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10000</span>;++i)
+            <span class="hljs-keyword">for</span>(ll j=i;j&lt;=<span class="hljs-number">10000</span>;j+=i)
+                h[i]=(h[i]+a[j])%P;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%I64d\n"</span>,(f(n)+P)%P);
+    &#125;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="HDU-5321-Beautiful-Set"><a href="#HDU-5321-Beautiful-Set" class="headerlink" title="HDU - 5321 : Beautiful Set"></a>HDU - 5321 : Beautiful Set</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="HDU-4947-GCD-Array"><a href="#HDU-4947-GCD-Array" class="headerlink" title="HDU - 4947 : GCD Array"></a>HDU - 4947 : GCD Array</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="HDU-5663-Hillan-and-the-girl"><a href="#HDU-5663-Hillan-and-the-girl" class="headerlink" title="HDU - 5663 : Hillan and the girl"></a>HDU - 5663 : Hillan and the girl</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="UESTC-811-GCD"><a href="#UESTC-811-GCD" class="headerlink" title="UESTC - 811 : GCD"></a>UESTC - 811 : GCD</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="HDU-5656-CA-Loves-GCD"><a href="#HDU-5656-CA-Loves-GCD" class="headerlink" title="HDU - 5656 : CA Loves GCD"></a>HDU - 5656 : CA Loves GCD</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="ACdream-1114-Number-theory"><a href="#ACdream-1114-Number-theory" class="headerlink" title="ACdream - 1114 : Number theory"></a>ACdream - 1114 : Number theory</h2><blockquote>
+<p>题目大意：给出$n$ 个数，问满足$gcd(a_i,a_j)=1$ 且$i&lt;j$ 的点对有多少个。</p>
+</blockquote>
+<h3 id="莫比乌斯反演-4"><a href="#莫比乌斯反演-4" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h3><p>$$<br>f(n)=\sum_{i=1}^n\sum_{j=1}^n[(a_i,a_j)=1]\\<br>f(n)=\sum_{i=1}^n\sum_{j=1}^n\sum_{d|(a_i,a_j)}u(d)<br>$$</p>
+<p>设$g(d)$ 表示能被$d$ 整除的数的个数，则有<br>$$<br>f(n)=\sum_{d=1}^{max(a_i)}u(d)g^2(d)<br>$$<br>复杂度$O(nlogn)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">222222</span>+<span class="hljs-number">5</span>;
+ll p[N],vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,k,mu[N]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ll n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])&#123;
+            p[k++]=i;
+            mu[i]=<span class="hljs-number">-1</span>;
+        &#125;
+        <span class="hljs-keyword">for</span>(ll j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;p[j]*i&lt;n;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)&#123;
+                mu[i*p[j]]=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;<span class="hljs-keyword">else</span> mu[i*p[j]]=-mu[i];
+        &#125;
+    &#125;
+&#125;
+ll n,a[N],d[N],t;
+<span class="hljs-function">ll <span class="hljs-title">Max</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;
+    <span class="hljs-keyword">return</span> a&gt;b?a:b;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">solve</span><span class="hljs-params">(ll n)</span></span>&#123;
+    ll ans=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=n;++i)
+        ans+=mu[i]*d[i];
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(N);
+    <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>,&amp;n))&#123;
+        <span class="hljs-built_in">memset</span>(a,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(a));
+        <span class="hljs-built_in">memset</span>(d,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(d));
+        ll mx=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">0</span>;i&lt;n;++i)&#123;
+            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>,&amp;t);
+            mx=Max(mx,t);
+            a[t]++;
+        &#125;
+        <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=mx;++i)
+            <span class="hljs-keyword">for</span>(ll j=i;j&lt;=mx;j+=i)
+                d[i]+=a[j];
+        <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=mx;++i)
+            d[i]=d[i]*(d[i]<span class="hljs-number">-1</span>)/<span class="hljs-number">2</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,solve(mx));
+    &#125;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="HDU-5468-Puzzled-Elena"><a href="#HDU-5468-Puzzled-Elena" class="headerlink" title="HDU - 5468 : Puzzled Elena"></a>HDU - 5468 : Puzzled Elena</h2><blockquote>
+<p>待更</p>
+</blockquote>
+<h2 id="HDU-2841-Visible-Trees"><a href="#HDU-2841-Visible-Trees" class="headerlink" title="HDU - 2841 :  Visible Trees"></a>HDU - 2841 :  Visible Trees</h2><blockquote>
+<p>题目大意：问从$(0,0)$ 点看第一象限$n \times m$ 范围，最多能看到几个点。</p>
+</blockquote>
+<h3 id="莫比乌斯反演-5"><a href="#莫比乌斯反演-5" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h3><p>$$<br>f(n,m)=\sum_{i=1}^n\sum_{j=1}^m[(i,j=1)]\\<br>f(n,m)=\sum_{i=1}^n\sum_{j=1}^m\sum_{d|(i,j)}u(d)\\<br>f(n,m)=\sum_{d=1}^{min(n,m)}u(d)\sum_{i=1}^{\lfloor \frac{n}{d} \rfloor}\sum_{j=1}^{\lfloor \frac{m}{d} \rfloor}1\\<br>$$</p>
+<p>分块优化后复杂度为$O(\sqrt{n})$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">100005</span>;
+ll T,n,m,p[N],vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,k,mu[N]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;,pu[N];
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])&#123;
+            p[k++]=i;
+            mu[i]=<span class="hljs-number">-1</span>;
+        &#125;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;i*p[j]&lt;n;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)&#123;
+                mu[i*p[j]]=<span class="hljs-number">0</span>;
+                <span class="hljs-keyword">break</span>;
+            &#125;<span class="hljs-keyword">else</span> mu[i*p[j]]=-mu[i];
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;++i)
+        pu[i]=pu[i<span class="hljs-number">-1</span>]+mu[i];
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">solve</span><span class="hljs-params">(ll n,ll m)</span></span>&#123;
+    ll ans=<span class="hljs-number">0</span>,len=<span class="hljs-built_in">min</span>(n,m);
+    <span class="hljs-keyword">for</span>(ll d=<span class="hljs-number">1</span>;d&lt;=len;)&#123;
+        ll td=<span class="hljs-built_in">min</span>(n/(n/d),m/(m/d));
+        ans+=(pu[td]-pu[d<span class="hljs-number">-1</span>])*(n/d)*(m/d);
+        d=td+<span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(N);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%I64d"</span>,&amp;T);
+    <span class="hljs-keyword">while</span>(T--)&#123;
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%I64d%I64d"</span>,&amp;n,&amp;m);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%I64d\n"</span>,solve(n,m));
+    &#125;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="POJ-3904-Sky-Code"><a href="#POJ-3904-Sky-Code" class="headerlink" title="POJ - 3904 : Sky Code"></a>POJ - 3904 : Sky Code</h2><blockquote>
+<p>待更</p>
+</blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Acm/">Acm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/">莫比乌斯反演</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E8%AE%BA/">数论</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%B9%E6%96%A5/">容斥</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/08/23/HDU%206166%20Senior%20Pan(2017%20Multi-University%20Training%20Contest%20-%20Team%209)/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HDU 6166 Senior Pan(2017 Multi-University Training Contest - Team 9)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2017/08/16/HDU%206128%20Inverse%20of%20sum(2017%20Multi-University%20Training%20Contest%20-%20Team%207)/">
+                        <span class="hidden-mobile">HDU6128 Inverse of sum(2017 Multi-University Training Contest - Team 7)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "莫比乌斯反演练习&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

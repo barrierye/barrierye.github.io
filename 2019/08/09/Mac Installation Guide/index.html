@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>MAC Installation Guide - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2019-08-09 10:06">
+                    星期五, 八月 9日 2019, 10:06 上午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>前些阵子爸妈去了趟香港顺便给我换了台电脑，怀着开心愉悦（并不）的心情开始了装机之旅。</p>
+<a id="more"></a>
+
+<h1 id="基础部件"><a href="#基础部件" class="headerlink" title="基础部件"></a>基础部件</h1><blockquote>
+<p>免费</p>
+</blockquote>
+<ul>
+<li>网络代理：<a href="https://github.com/shadowsocks/shadowsocks-iOS/releases" target="_blank" rel="noopener">Shadowsocks</a> 或 <a href="https://github.com/yichengchen/clashX" target="_blank" rel="noopener">ClashX</a></li>
+<li>文本编辑器：<a href="http://www.sublimetext.com" target="_blank" rel="noopener">Sublime Text</a></li>
+<li>思维导图：<a href="https://www.xmind.cn" target="_blank" rel="noopener">xmind</a>（免费版导出带水印）</li>
+<li>压缩软件：<a href="https://ezip.awehunt.com" target="_blank" rel="noopener">eZip</a></li>
+<li>邮件管理：<a href="http://mail.163.com/dashi/" target="_blank" rel="noopener">网易邮件大师</a>（自带Mail.app叉掉后不能提醒，而网易邮件大师可以在不完全关闭情况下提醒。缺点是可能会有一些广告，暂时只发现在新添加邮箱时会发送一封广告）</li>
+<li>最佳视频播放器：<a href="https://iina.io" target="_blank" rel="noopener">IINA</a></li>
+<li>TODOList：滴答清单</li>
+<li>检查英文文章的拼写、句式、结构：1Checker</li>
+</ul>
+<blockquote>
+<p>一次性付费</p>
+</blockquote>
+<ul>
+<li>虚拟机：<a href="https://bbs.feng.com/read-htm-tid-12404529.html" target="_blank" rel="noopener">Parallels Desktop</a>（相比于VM有融合模式，相当于在Mac上直接用Win程序；兼容性完爆VBox）</li>
+<li><a href="https://www.cnblogs.com/xiaokang01/p/10042181.html" target="_blank" rel="noopener">Office组件</a></li>
+</ul>
+<blockquote>
+<p>订阅式付费</p>
+</blockquote>
+<ul>
+<li>地表最强密码管理软件：1Password</li>
+</ul>
+<br />
+
+<h1 id="小工具"><a href="#小工具" class="headerlink" title="小工具"></a>小工具</h1><blockquote>
+<p>免费</p>
+</blockquote>
+<ul>
+<li>Wechat免密登陆&amp;防撤回：WeChatTweak-macOS</li>
+<li>非敏感图片上传最佳图床：iPic（免费图床是匿名微博）</li>
+<li>卸载工具：AppCleaner（不能保证完全，单比直接拖回收站好很多）</li>
+<li>局域网内终端间通信：Dukto（Mac与Win传输文件等）</li>
+<li>壁纸软件：pap.er</li>
+<li>下载程序：Aria2GUI（<a href="https://www.baiduwp.com" target="_blank" rel="noopener">百度云链接解析网站</a>）</li>
+<li>查看电池循环次数：Battery Health2</li>
+<li>避免合盖睡眠：InsomniaX</li>
+<li>gif录制工具：GIPHY CAPTURE</li>
+<li>BT下载工具：Folx（app内搜索种子下载）</li>
+<li>日历快速查看工具：PixelScheduler（在系统自带日历应用或其它第三方日历应用的基础上，展现在屏幕的边缘）</li>
+<li>根据发生的事件自动执行命令/脚本：ControlPlane</li>
+<li>正版 app 的序列号收集器：KCNScrew</li>
+<li>屏幕录像的最佳 app：LICEcap</li>
+<li>远程桌面：Microsoft Remote Desktop</li>
+<li>远程控制：TeamViewer（个人免费）</li>
+</ul>
+<blockquote>
+<p>一次性付费</p>
+</blockquote>
+<ul>
+<li>增强版Spotlight：Alfred</li>
+<li>自动填充：CodeExpander（强烈推荐）</li>
+</ul>
+<br />
+
+<h1 id="开发相关"><a href="#开发相关" class="headerlink" title="开发相关"></a>开发相关</h1><blockquote>
+<p>免费</p>
+</blockquote>
+<ul>
+<li>Vim插件（<a href="https://github.com/junegunn/vim-plug）" target="_blank" rel="noopener">https://github.com/junegunn/vim-plug）</a><ul>
+<li>C++语法高亮: octol/vim-cpp-enhanced-highlight</li>
+<li>markdown即时渲染: godlygeek/tabular, plasticboy/vim-markdown, suan/vim-instant-markdown</li>
+<li>批量注释: scrooloose/nerdcommenter</li>
+<li>AI自动补全: zxqfl/tabnine-vim（sublime上也可以来一个）</li>
+<li>静态语法与代码风格检查: dense-analysis/ale（scrooloose/syntastic与YouCompleteMe默认冲突，需要设置let g:ycm_show_diagnostics_ui = 0，同时syntastic过于笨重；ale的语法检查是异步执行的，基本不会出现卡顿的情况，且默认会使用所有检查工具并发地进行检查）</li>
+</ul>
+</li>
+<li>IDE：xcode</li>
+<li>终端：<a href="https://zhuanlan.zhihu.com/p/26010783" target="_blank" rel="noopener">iTerm + oh my zsh</a>（iTerm可以用F12快速切换，oh my zsh可以智能扩展文件名以及配置好看的界面）</li>
+<li>命令行工具<ul>
+<li>Python版本管理：pyenv（舒服地切换py版本）</li>
+<li>终端窗口复用：tmux</li>
+<li>打印系统软硬件信息：Neofetch</li>
+<li>终端路径跳转：autojump</li>
+</ul>
+</li>
+<li>富媒体内容下载：<a href="https://github.com/soimort/you-get" target="_blank" rel="noopener">You-Get</a></li>
+<li>离线API文档：<a href="https://kapeli.com/dash" target="_blank" rel="noopener">Dash</a></li>
+<li>Latex：<a href="http://tug.org/mactex/" target="_blank" rel="noopener">MacTex</a>（可以用自带的TexShop或者参照<a href="https://zhuanlan.zhihu.com/p/46942059" target="_blank" rel="noopener">如何用 macOS 优雅的敲 LaTeX</a>配合sublime使用）</li>
+<li>Markdown：<a href="https://www.typora.io" target="_blank" rel="noopener">Typora</a></li>
+<li>捕获流量：Wireshark</li>
+<li>图片压缩工具：Guetzli</li>
+</ul>
+<br />
+
+<h1 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h1><pre><code class="hljs bash"><span class="hljs-comment"># ==================== 垃圾箱 ======================</span>
+TERMINAL_TRASH=<span class="hljs-string">"/Users/barriery/.Trash.terminal"</span>
+<span class="hljs-built_in">alias</span> rm=rmtrash
+<span class="hljs-built_in">alias</span> rls=<span class="hljs-string">'ls $&#123;TERMINAL_TRASH&#125;'</span>
+<span class="hljs-built_in">alias</span> rll=<span class="hljs-string">'ll $&#123;TERMINAL_TRASH&#125;'</span>
+<span class="hljs-built_in">alias</span> rrm=<span class="hljs-string">'/bin/rm -rf'</span>
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">rmtrash</span></span>()&#123;
+  mv -i <span class="hljs-variable">$@</span> <span class="hljs-variable">$&#123;TERMINAL_TRASH&#125;</span>/
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">recover</span></span>()&#123;
+  mv -i <span class="hljs-variable">$&#123;TERMINAL_TRASH&#125;</span>/<span class="hljs-variable">$@</span> ./
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">cleartrash</span></span>()&#123;
+  /bin/rm -rf <span class="hljs-variable">$&#123;TERMINAL_TRASH&#125;</span>/*
+&#125;
+
+
+<span class="hljs-comment"># ===================== util =======================</span>
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">setcolor</span></span>() &#123;
+    <span class="hljs-built_in">export</span> BLACK=<span class="hljs-string">'\033[30m'</span>
+    <span class="hljs-built_in">export</span> RED=<span class="hljs-string">'\033[0;31m'</span>
+    <span class="hljs-built_in">export</span> GREEN=<span class="hljs-string">'\033[32m'</span>
+    <span class="hljs-built_in">export</span> YELLOW=<span class="hljs-string">'\033[33m'</span>
+    <span class="hljs-built_in">export</span> BLUE=<span class="hljs-string">'\033[0;34m'</span>
+    <span class="hljs-built_in">export</span> PURPLE=<span class="hljs-string">'\033[35m'</span>
+    <span class="hljs-built_in">export</span> CYAN=<span class="hljs-string">'\033[36m'</span>
+    <span class="hljs-built_in">export</span> WHITE=<span class="hljs-string">'\033[37m'</span>
+    <span class="hljs-built_in">export</span> BOLD=<span class="hljs-string">'\033[1m'</span>
+    <span class="hljs-built_in">export</span> NONE=<span class="hljs-string">'\033[0m'</span>
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">unsetcolor</span></span>() &#123;
+    <span class="hljs-built_in">unset</span> BLACK
+    <span class="hljs-built_in">unset</span> RED
+    <span class="hljs-built_in">unset</span> GREEN
+    <span class="hljs-built_in">unset</span> YELLOW
+    <span class="hljs-built_in">unset</span> BLUE
+    <span class="hljs-built_in">unset</span> PURPLE
+    <span class="hljs-built_in">unset</span> CYAN
+    <span class="hljs-built_in">unset</span> WHITE
+    <span class="hljs-built_in">unset</span> BOLD
+    <span class="hljs-built_in">unset</span> NONE
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">plog</span></span>()&#123;
+    <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -ne 3 ]; <span class="hljs-keyword">then</span>
+        plog ERROR red <span class="hljs-string">"Usage: plog LEVEL COLOR MESSAGE"</span>
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+    level=[<span class="hljs-variable">$1</span>]
+    color=<span class="hljs-variable">$2</span>
+    message=<span class="hljs-variable">$3</span>
+    timestamp=[$(date <span class="hljs-string">"+%Y-%m-%d %H:%M:%S"</span>)]
+    setcolor
+    <span class="hljs-keyword">case</span> <span class="hljs-variable">$&#123;color&#125;</span> <span class="hljs-keyword">in</span>
+        black|k|黑|30)
+            level=<span class="hljs-variable">$&#123;BLACK&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        red|r|红|31)
+            level=<span class="hljs-variable">$&#123;RED&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        green|g|绿|32)
+            level=<span class="hljs-variable">$&#123;GREEN&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        yellow|y|黄|33)
+            level=<span class="hljs-variable">$&#123;YELLOW&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        blue|b|蓝|34)
+            level=<span class="hljs-variable">$&#123;BLUE&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        purple|p|紫|35)
+            level=<span class="hljs-variable">$&#123;PURPLE&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        cyan|c|青|36)
+            level=<span class="hljs-variable">$&#123;CYAN&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        white|w|白|37)
+            level=<span class="hljs-variable">$&#123;WHITE&#125;</span><span class="hljs-variable">$&#123;level&#125;</span><span class="hljs-variable">$&#123;NONE&#125;</span>;;
+        *)
+            plog ERROR red <span class="hljs-string">"Unknown param color <span class="hljs-variable">$&#123;color&#125;</span>"</span>
+            unsetcolor
+            <span class="hljs-built_in">return</span> 1;;
+    <span class="hljs-keyword">esac</span>
+    unsetcolor
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;timestamp&#125;</span> <span class="hljs-variable">$&#123;level&#125;</span> <span class="hljs-variable">$&#123;message&#125;</span>
+&#125;
+
+<span class="hljs-comment"># mac 下的命令完成通知</span>
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">notify</span></span>()&#123;
+  start_time=`date +%s`;
+  cmd=`<span class="hljs-built_in">echo</span> <span class="hljs-variable">$@</span>`;
+  <span class="hljs-built_in">eval</span> <span class="hljs-variable">$@</span>;
+  end_time=`date +%s`
+  timer_time=$((end_time-start_time))
+  unit=<span class="hljs-string">"s"</span>
+  <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$timer_time</span> -gt 60 ]]; <span class="hljs-keyword">then</span>
+      unit=<span class="hljs-string">"m"</span>
+      timer_time=`<span class="hljs-built_in">echo</span> $((<span class="hljs-variable">$timer_time</span>/60.0))|awk <span class="hljs-string">'&#123;printf("%.2f", $1)&#125;'</span>`
+  <span class="hljs-keyword">fi</span>
+  terminal-notifier -title <span class="hljs-string">'Notifier'</span> -message <span class="hljs-string">'command was finished in '</span><span class="hljs-variable">$&#123;timer_time&#125;</span><span class="hljs-variable">$&#123;unit&#125;</span><span class="hljs-string">'</span>
+<span class="hljs-string">'</span><span class="hljs-variable">$&#123;cmd&#125;</span> -sound default -execute <span class="hljs-string">"open /Applications/iTerm.app"</span>;
+&#125;
+
+
+<span class="hljs-comment"># ===================== 代理 =======================</span>
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">setproxy</span></span>()&#123;
+  <span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">"socks5://0.0.0.0:1086"</span>;
+  <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">"socks5://0.0.0.0:1086"</span>;
+  <span class="hljs-comment"># export ALL_PROXY="socks5://127.0.0.1:1086";</span>
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">unsetproxy</span></span>()&#123;
+  <span class="hljs-built_in">unset</span> http_proxy
+  <span class="hljs-built_in">unset</span> https_proxy
+  <span class="hljs-built_in">unset</span> ALL_PROXY
+&#125;
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">proxy</span></span>()&#123;
+  setproxy
+  <span class="hljs-variable">$@</span>;
+  unsetproxy
+&#125;
+setproxy <span class="hljs-comment"># 默认开启</span>
+
+
+<span class="hljs-comment"># =================== ssh/frp =====================</span>
+<span class="hljs-comment"># frp</span>
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">frp</span></span>()&#123;
+    <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -ne 4 ]; <span class="hljs-keyword">then</span>
+        plog ERROR red <span class="hljs-string">"Usage: frp SERVER_IP CLIENT_IP PORT USR"</span>
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+    server_ip=<span class="hljs-variable">$1</span>
+    client_ip=<span class="hljs-variable">$2</span>
+    port=<span class="hljs-variable">$3</span>
+    usr=<span class="hljs-variable">$4</span>
+    gtimeout 1 nc -z -n <span class="hljs-variable">$&#123;client_ip&#125;</span> 22 &amp;&gt;/dev/null
+    <span class="hljs-keyword">if</span> [ $? -ne 0 ]; <span class="hljs-keyword">then</span>
+        plog INFO green <span class="hljs-string">"SSH by FRP"</span>
+        ssh -p <span class="hljs-variable">$&#123;port&#125;</span> <span class="hljs-variable">$&#123;usr&#125;</span>@<span class="hljs-variable">$&#123;server_ip&#125;</span>
+    <span class="hljs-keyword">else</span>
+        ssh <span class="hljs-variable">$&#123;usr&#125;</span>@<span class="hljs-variable">$&#123;client_ip&#125;</span>
+    <span class="hljs-keyword">fi</span>
+&#125;
+
+
+<span class="hljs-comment"># ================== c/c++ env =====================</span>
+<span class="hljs-built_in">alias</span> g++=<span class="hljs-string">'echo "\033[32musing Homebrew GCC 9.1.0 \033[0m"; /usr/local/Cellar/gcc/9.2.0_3/bin/g++-9'</span>
+<span class="hljs-comment"># alias gcc='echo "\033[32musing Homebrew GCC 9.1.0 \033[0m";/usr/local/Cellar/gcc/9.2.0_3/bin/gcc-9'</span>
+
+<span class="hljs-comment"># boost</span>
+<span class="hljs-built_in">export</span> BOOST_ROOT=/Users/barriery/Helper/third_party/boost/
+<span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-string">"<span class="hljs-variable">$LD_LIBRARY_PATH</span>:/Users/barriery/Helper/third_party/boost/lib"</span>
+
+
+<span class="hljs-comment"># ================== python env ====================</span>
+<span class="hljs-comment"># pyenv</span>
+<span class="hljs-built_in">alias</span> brew=<span class="hljs-string">'env PATH=$&#123;PATH//$(pyenv root)\/shims:/&#125; brew'</span>
+<span class="hljs-built_in">eval</span> <span class="hljs-string">"<span class="hljs-variable">$(pyenv init -)</span>"</span>
+<span class="hljs-built_in">eval</span> <span class="hljs-string">"<span class="hljs-variable">$(pyenv virtualenv-init -)</span>"</span>
+<span class="hljs-built_in">eval</span> <span class="hljs-string">"<span class="hljs-variable">$(pipenv --completion)</span>"</span>
+
+
+<span class="hljs-comment"># =================== ruby env =====================</span>
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"/usr/local/opt/ruby/bin:<span class="hljs-variable">$PATH</span>"</span>
+<span class="hljs-comment"># for compile</span>
+<span class="hljs-comment"># export LDFLAGS="-L/usr/local/opt/ruby/lib"</span>
+<span class="hljs-comment"># export CPPFLAGS="-I/usr/local/opt/ruby/include"</span>
+
+
+<span class="hljs-comment"># ================== other env =====================</span>
+<span class="hljs-comment"># autojump</span>
+[ -f /usr/<span class="hljs-built_in">local</span>/etc/profile.d/autojump.sh ] &amp;&amp; . /usr/<span class="hljs-built_in">local</span>/etc/profile.d/autojump.sh
+
+<span class="hljs-comment"># brew mirror</span>
+<span class="hljs-built_in">export</span> HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"/usr/local/opt/gnu-getopt/bin:<span class="hljs-variable">$PATH</span>"</span></code></pre>
+
+<br />
+
+<h1 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h1><pre><code class="hljs bash"><span class="hljs-built_in">let</span> mapleader=<span class="hljs-string">";"</span> <span class="hljs-string">" 定义快捷键的前缀，即&lt;Leader&gt;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">"</span> 用~/clipsongzboard作为剪切板实现复制粘贴到系统剪切板
+map &lt;C-c&gt; y:e ~/clipsongzboard&lt;CR&gt;P:w&lt;cr&gt;:w !pbcopy&lt;CR&gt;&lt;cr&gt;:1,<span class="hljs-variable">$d</span>&lt;cr&gt;:w&lt;cr&gt;&lt;C-o&gt;&lt;C-o&gt;
+
+<span class="hljs-string">" 让光标停留在上一次打开的行</span>
+<span class="hljs-string">if has("</span>autocmd<span class="hljs-string">")</span>
+<span class="hljs-string">  au BufReadPost * if line("</span><span class="hljs-string">'\"") &gt; 1 &amp;&amp; line("'</span>\"<span class="hljs-string">") &lt;= line("</span>$<span class="hljs-string">") | exe "</span>normal! g<span class="hljs-string">'\"" | endif</span>
+<span class="hljs-string">endif</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" 移除 Windows 文件结尾的 `^M`</span>
+<span class="hljs-string">noremap &lt;leader&gt;m :%s/&lt;C-V&gt;&lt;C-M&gt;//ge&lt;CR&gt;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" 在断行、合并(join)行时，针对多字节字符（比如中文）的优化处理</span>
+<span class="hljs-string">set formatoptions+=mM</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" 高亮不想要的空格（行尾）</span>
+<span class="hljs-string">" See [http://vim.wikia.com/wiki/Highlight_unwanted_spaces]</span>
+<span class="hljs-string">" - highlight trailing whitespace in red</span>
+<span class="hljs-string">" - have this highlighting not appear whilst you are typing in insert mode</span>
+<span class="hljs-string">" - have the highlighting of whitespace apply when you open new buffers</span>
+<span class="hljs-string">highlight ExtraWhitespace ctermbg=red guibg=red</span>
+<span class="hljs-string">match ExtraWhitespace /\s\+$/</span>
+<span class="hljs-string">autocmd BufWinEnter * match ExtraWhitespace /\s\+$/</span>
+<span class="hljs-string">autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@&lt;!$/</span>
+<span class="hljs-string">autocmd InsertLeave * match ExtraWhitespace /\s\+$/</span>
+<span class="hljs-string">autocmd BufWinLeave * call clearmatches() " for performance</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">colorscheme default " 设置颜色主题</span>
+<span class="hljs-string">filetype on " 检测文件类型</span>
+<span class="hljs-string">filetype plugin on " 根据侦测到的不同类型加载对应的插件</span>
+<span class="hljs-string">filetype indent on " 自适应不同语言的智能缩进</span>
+<span class="hljs-string">set backspace=2</span>
+<span class="hljs-string">set tabstop=4 " TAB宽4个空格</span>
+<span class="hljs-string">set expandtab " 将TAB转化成space</span>
+<span class="hljs-string">set number</span>
+<span class="hljs-string">set encoding=utf-8 " 文件默认编码</span>
+<span class="hljs-string">set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符</span>
+<span class="hljs-string">syntax on " 语法高亮</span>
+<span class="hljs-string">set hlsearch " 高亮显示搜索结果</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" 设置vim-plug管理的插件安装位置</span>
+<span class="hljs-string">call plug#begin('</span>~/.vim/bundle<span class="hljs-string">')</span>
+<span class="hljs-string">" 下面就是一些插件的例.</span>
+<span class="hljs-string">" 插件必须装在  plug#begin/end这两行命令之间.</span>
+<span class="hljs-string">" 对于在github上面的插件, 我们可以用以下方法添加, 只需要添加`用户名/插件名称`就行</span>
+<span class="hljs-string">"Plug '</span>tpope/vim-fugitive<span class="hljs-string">'</span>
+<span class="hljs-string">Plug '</span>octol/vim-cpp-enhanced-highlight<span class="hljs-string">'</span>
+<span class="hljs-string">Plug '</span>scrooloose/nerdtree<span class="hljs-string">' " 文件树</span>
+<span class="hljs-string">Plug '</span>godlygeek/tabular<span class="hljs-string">' " before vim-markdown</span>
+<span class="hljs-string">Plug '</span>plasticboy/vim-markdown<span class="hljs-string">'</span>
+<span class="hljs-string">Plug '</span>suan/vim-instant-markdown<span class="hljs-string">'</span>
+<span class="hljs-string">Plug '</span>scrooloose/nerdcommenter<span class="hljs-string">' " 批量注释</span>
+<span class="hljs-string">Plug '</span>zxqfl/tabnine-vim<span class="hljs-string">' " AI自动补全</span>
+<span class="hljs-string">Plug '</span>luochen1990/rainbow<span class="hljs-string">' " 嵌套括号不同染色</span>
+<span class="hljs-string">Plug '</span>autozimu/LanguageClient-neovim<span class="hljs-string">', &#123;'</span>branch<span class="hljs-string">': '</span>next<span class="hljs-string">', '</span><span class="hljs-keyword">do</span><span class="hljs-string">': '</span>bash install.sh<span class="hljs-string">'&#125; " LSP</span>
+<span class="hljs-string">Plug '</span>dense-analysis/ale<span class="hljs-string">' " 语法检查</span>
+<span class="hljs-string">" 对于在http://vim-scripts.org/vim/scripts.html下的插件, 我们直接添加插件名称就行</span>
+<span class="hljs-string">" Plug '</span>L9<span class="hljs-string">'</span>
+<span class="hljs-string">" 对于不是github也不是vim-scripts的插件, 则需要用完整路径</span>
+<span class="hljs-string">"Plug '</span>git://git.wincent.com/<span class="hljs-built_in">command</span>-t.git<span class="hljs-string">'</span>
+<span class="hljs-string">" 本地或者你自己的插件</span>
+<span class="hljs-string">"Plug '</span>file:///home/gmarik/path/to/plugin<span class="hljs-string">'</span>
+<span class="hljs-string"></span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" 所有的插件都需要安装在这条命令之前</span>
+<span class="hljs-string">call plug#end()</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">"ale</span>
+<span class="hljs-string">"始终开启标志列</span>
+<span class="hljs-string">let g:ale_sign_column_always = 1</span>
+<span class="hljs-string">let g:ale_set_highlights = 0</span>
+<span class="hljs-string">"自定义error和warning图标</span>
+<span class="hljs-string">let g:ale_sign_error = '</span>✗<span class="hljs-string">'</span>
+<span class="hljs-string">let g:ale_sign_warning = '</span>⚡<span class="hljs-string">'</span>
+<span class="hljs-string">"在vim自带的状态栏中整合ale</span>
+<span class="hljs-string">let g:ale_statusline_format = ['</span>✗ %d<span class="hljs-string">', '</span>⚡ %d<span class="hljs-string">', '</span>✔ OK<span class="hljs-string">']</span>
+<span class="hljs-string">"显示Linter名称,出错或警告等相关信息</span>
+<span class="hljs-string">let g:ale_echo_msg_error_str = '</span>E<span class="hljs-string">'</span>
+<span class="hljs-string">let g:ale_echo_msg_warning_str = '</span>W<span class="hljs-string">'</span>
+<span class="hljs-string">let g:ale_echo_msg_format = '</span>[%linter%] %s [%severity%]<span class="hljs-string">'</span>
+<span class="hljs-string">"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告</span>
+<span class="hljs-string">nmap sp &lt;Plug&gt;(ale_previous_wrap)</span>
+<span class="hljs-string">nmap sn &lt;Plug&gt;(ale_next_wrap)</span>
+<span class="hljs-string">"&lt;Leader&gt;s触发/关闭语法检查</span>
+<span class="hljs-string">nmap &lt;Leader&gt;s :ALEToggle&lt;CR&gt;</span>
+<span class="hljs-string">"&lt;Leader&gt;d查看错误或警告的详细信息</span>
+<span class="hljs-string">nmap &lt;Leader&gt;d :ALEDetail&lt;CR&gt;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" LSP</span>
+<span class="hljs-string">let g:LanguageClient_loadSettings = 1</span>
+<span class="hljs-string">let g:LanguageClient_diagnosticsEnable = 0</span>
+<span class="hljs-string">let g:LanguageClient_settingsPath = expand('</span>/Users/barriery/.vim/languageclient.json<span class="hljs-string">')</span>
+<span class="hljs-string">let g:LanguageClient_selectionUI = '</span>quickfix<span class="hljs-string">'</span>
+<span class="hljs-string">let g:LanguageClient_diagnosticsList = v:null</span>
+<span class="hljs-string">let g:LanguageClient_hoverPreview = '</span>Never<span class="hljs-string">'</span>
+<span class="hljs-string">let g:LanguageClient_serverCommands = &#123;&#125;</span>
+<span class="hljs-string">let g:LanguageClient_serverCommands.c = ['</span>cquery<span class="hljs-string">']</span>
+<span class="hljs-string">let g:LanguageClient_serverCommands.cpp = ['</span>cquery<span class="hljs-string">']</span>
+<span class="hljs-string">noremap &lt;leader&gt;rd :call LanguageClient#textDocument_definition()&lt;cr&gt;</span>
+<span class="hljs-string">noremap &lt;leader&gt;rr :call LanguageClient#textDocument_references()&lt;cr&gt;</span>
+<span class="hljs-string">noremap &lt;leader&gt;rv :call LanguageClient#textDocument_hover()&lt;cr&gt;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" rainbow</span>
+<span class="hljs-string">let g:rainbow_active = 1</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" NERD commenter</span>
+<span class="hljs-string">let g:NERDSpaceDelims=1 " 注释的时候自动加个空格,</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" vim</span>
+<span class="hljs-string">autocmd BufNewFile,BufRead *.md set nofoldenable " 取消自动折叠</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">" NERD tree</span>
+<span class="hljs-string">let NERDChristmasTree=0</span>
+<span class="hljs-string">let NERDTreeWinSize=35</span>
+<span class="hljs-string">let NERDTreeChDirMode=2</span>
+<span class="hljs-string">let NERDTreeIgnore=['</span>\~$<span class="hljs-string">', '</span>\.pyc$<span class="hljs-string">', '</span>\.swp$<span class="hljs-string">']</span>
+<span class="hljs-string">let NERDTreeShowBookmarks=1</span>
+<span class="hljs-string">let NERDTreeWinPos="left"</span>
+<span class="hljs-string">let NERDTreeShowHidden=1</span>
+<span class="hljs-string">" Automatically open a NERDTree if no files where specified</span>
+<span class="hljs-string">autocmd vimenter * if !argc() | NERDTree | endif</span>
+<span class="hljs-string">" Close vim if the only window left open is a NERDTree</span>
+<span class="hljs-string">autocmd bufenter * if (winnr("$") == 1 &amp;&amp; exists("b:NERDTreeType") &amp;&amp; b:NERDTreeType == "primary") | q | endif</span>
+<span class="hljs-string">" Open a NERDTree</span>
+<span class="hljs-string">nmap &lt;F5&gt; :NERDTreeToggle&lt;cr&gt;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">function HeaderPython()</span>
+<span class="hljs-string">        call setline(1, "#-*- coding:utf8 -*-")</span>
+<span class="hljs-string">        call append(1, "# Powered by barriery")</span>
+<span class="hljs-string">        call append(2, "# at ".strftime('</span>%Y-%m-%d %T<span class="hljs-string">', localtime()))</span>
+<span class="hljs-string">        call append(3, "# ----------------------")</span>
+<span class="hljs-string">endf</span>
+<span class="hljs-string">function HeaderCPP()</span>
+<span class="hljs-string">        call setline(1, "// Powered by barriery")</span>
+<span class="hljs-string">        call append(1, "// at ".strftime('</span>%Y-%m-%d %T<span class="hljs-string">', localtime()))</span>
+<span class="hljs-string">        call append(2, "// ----------------------")</span>
+<span class="hljs-string">endf</span>
+<span class="hljs-string">autocmd bufnewfile *.py call HeaderPython()</span>
+<span class="hljs-string">autocmd bufnewfile *.c call HeaderCPP()</span>
+<span class="hljs-string">autocmd bufnewfile *.cc call HeaderCPP()</span>
+<span class="hljs-string">autocmd bufnewfile *.cpp call HeaderCPP()</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">autocmd BufWritePost $MYVIMRC source $MYVIMR " 让配置变更立即生效</span></code></pre>
+
+<br />
+
+<h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p>上述仅个人使用Mac时所用软件。</p>
+<p>mac各类开发的安装向导：<a href="https://github.com/sb2nov/mac-setup" target="_blank" rel="noopener">https://github.com/sb2nov/mac-setup</a></p>
+<p>参考<a href="https://www.tr0y.wang/2018/10/04/initenv/#Mac?nsukey=%2BoNqBhccCqXueKYbsZLNgnW%2F%2B9FhHMCo%2FBi3plEolHk16YMgLnb9vGPy1g%2FUkVDdHpjRzEKWHqQF6K5XFSy3HxalZQDJAXdl2jDZa97D3zeUjOYLgw2o8jhhN%2BE%2BUX%2FTdLYD8423CX%2FtK1tdZvqz9QuLM8aeIQWam1EtE02c3sF6RvldfqsjS0T5NaKMOd1uAVOo7ZTZHe%2B%2FEvzjGxqUow%3D%3D" target="_blank" rel="noopener">电脑配置环境记录</a>。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/macOS/">macOS</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/08/11/tabnine-vim%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">tabnine-vim插件使用时遇到的一些问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2018/10/01/barriery%E7%9A%84%E4%BD%9B%E7%B3%BB%E4%BF%9D%E7%A0%94/">
+                        <span class="hidden-mobile">barriery的佛系保研</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MAC Installation Guide&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

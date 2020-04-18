@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>RPC初探: 基于brpc写一个简单的Add服务 - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-04-12 15:43">
+                    星期日, 四月 12日 2020, 3:43 下午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>本篇将介绍RPC原理，以及如何基于bprc编写一个简单的Add服务。</p>
+<a id="more"></a>
+
+<h2 id="PRC原理"><a href="#PRC原理" class="headerlink" title="PRC原理"></a>PRC原理</h2><p>RPC（Remote procedure call）的原理可以简述为下图，Client调用Server上的进程时，Client的调用进程将被挂起，而Server上的被调用进程开始执行，调用方将参数传到被调用过程，得到回传结果。</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdr0yn0uclj30y00dgjt2.jpg" srcset="/img/loading.gif" alt="image-20200412144302504" style="zoom:30%;" />
+
+<p>RPC通常借助stub来实现，stub是一组RPC机制的操作原语，这些原语构成了RPC的实现细节。</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdr0ypc997j31640t4k2k.jpg" srcset="/img/loading.gif" alt="image-20200412144503030" style="zoom:40%;" />
+
+<ol>
+<li>Client调用本地stub中的一个过程，开始远程过程调用请求</li>
+<li>这个stub过程把有关的参数组装成一个信息包或一组信息包，形成一条消息。运行此执行过程的远程场点的<code>IP地址</code>和执行该过程的<code>进程ID号</code>也包含在这条消息中。</li>
+<li>stub把这条消息发送给对应的RPC runtime（RPC运行库）子程序，由这个子程序将详细发送到远程场点。</li>
+<li>Server端的RPC runtime子程序在接收到这条消息时，引用与被调用者对应的stub中的一个子程序，并让它来处理消息。</li>
+<li>与被调用者对应的stub中的这个子程序卸载信息，解析出相关参数，并用本地调用方式执行所指定的过程。</li>
+<li>返回调用结果，调用者对应的stub子程序执行return语句返回到Client，整个RPC过程结束。</li>
+</ol>
+<h2 id="brpc"><a href="#brpc" class="headerlink" title="brpc"></a>brpc</h2><p>brpc是百度开源的工业级RPC框架，支持多种传输协议，目前只开源了C++版本。</p>
+<p>在bprc中，参数传递使用protobuf协议，避免了指针类参数等问题。</p>
+<h2 id="如何使用brpc"><a href="#如何使用brpc" class="headerlink" title="如何使用brpc"></a>如何使用brpc</h2><p>下面将以Add Service为例，来展示如何使用brpc。</p>
+<p>Client的调用进程调用Server中的Add过程后被挂起，直到收到调用结构，参数为一组整数。Server计算这组整数的和，并回传调用结果。</p>
+<h3 id="编译brpc"><a href="#编译brpc" class="headerlink" title="编译brpc"></a>编译brpc</h3><p>根据<a href="https://github.com/apache/incubator-brpc/blob/master/docs/cn/getting_started.md#macos" target="_blank" rel="noopener">快速文档</a>编译brpc，以macOS用户为例：</p>
+<pre><code class="hljs shell">brew install openssl git gnu-getopt coreutils
+brew install gflags protobuf leveldb
+git clone https://github.com/apache/incubator-brpc
+cd incubator-brpc
+sh config_brpc.sh --headers=/usr/local/include --libs=/usr/local/lib --cc=clang --cxx=clang++
+make -j10</code></pre>
+
+<h3 id="定义Service"><a href="#定义Service" class="headerlink" title="定义Service"></a>定义Service</h3><p>brpc中将远程过程称为Service，采用protobuf协议。</p>
+<p>这里Request参数为Client调用远程过程的参数（一组整数），Response参数为Server过程的调用结果（一组整数的和），AddService即是所定义的远程过程。</p>
+<p>通过<code>protoc --cpp_out=. --proto_path=.  add.proto</code>命令即可生成对应的头文件<code>add.pb.h</code>，包含AddRequest、AddResponse，以及AddService_Stub等相关的定义。</p>
+<pre><code class="hljs protobuf">syntax=<span class="hljs-string">"proto2"</span>;
+<span class="hljs-keyword">option</span> cc_generic_services = <span class="hljs-literal">true</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">AddRequest</span> </span>&#123;
+    <span class="hljs-keyword">repeated</span> <span class="hljs-built_in">int32</span> adds = <span class="hljs-number">1</span>;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">AddResponse</span> </span>&#123;
+    <span class="hljs-keyword">required</span> <span class="hljs-built_in">int32</span> result = <span class="hljs-number">1</span>;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">service</span> <span class="hljs-title">AddService</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Add(AddRequest) <span class="hljs-keyword">returns</span> (AddResponse)</span>;
+&#125;;</code></pre>
+
+<h3 id="Client端"><a href="#Client端" class="headerlink" title="Client端"></a>Client端</h3><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;brpc/channel.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"add.pb.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span> </span>&#123;
+    brpc::Channel channel;
+
+    <span class="hljs-comment">// Initialize the channel</span>
+    brpc::ChannelOptions options;
+    options.protocol = <span class="hljs-string">"baidu_std"</span>;
+    options.connection_type = <span class="hljs-string">""</span>;
+    options.timeout_ms = <span class="hljs-number">100</span>;
+    options.max_retry = <span class="hljs-number">3</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> endpoints = <span class="hljs-string">"0.0.0.0:8000"</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> load_balancer = <span class="hljs-string">""</span>; <span class="hljs-comment">// single server</span>
+    <span class="hljs-keyword">if</span> (channel.Init(endpoints.c_str(), load_balancer.c_str(), &amp;options) != <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">"Fail to initialize channel"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+
+    <span class="hljs-comment">// Create stub</span>
+    <span class="hljs-function">AddService_Stub <span class="hljs-title">stub</span><span class="hljs-params">(&amp;channel)</span></span>;
+
+    AddRequest request;
+    AddResponse response;
+    brpc::Controller cntl;
+    cntl.request_attachment().append(<span class="hljs-string">""</span>);
+
+    <span class="hljs-comment">// Pack params</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; ++i) &#123;
+        request.add_adds(i);
+    &#125;
+
+    <span class="hljs-comment">// Start Add service</span>
+    stub.Add(&amp;cntl, &amp;request, &amp;response, <span class="hljs-literal">NULL</span>);
+
+    <span class="hljs-keyword">if</span> (!cntl.Failed()) &#123;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"get: "</span> &lt;&lt; response.result() &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">"get: failed"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    &#125;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<p>在bprc中没有Client对应的实体，取而代之的是<code>brpc::Channel</code>，代表和一台或一组服务器的交互通道。在实践中中Client和Channel的角色基本没有差别，可以将Channel视作Client。Channel的创建和初始化并不是线程安全的，初始化结束后可以被多线程共用。</p>
+<p>Client端将相关参数打包好后，通过调用本地stub中的Add过程，来执行Server端的AddService。</p>
+<p><code>tub.Add(&amp;cntl, &amp;request, &amp;response, NULL)</code>的最后一个参数表示本次调用为同步调用。</p>
+<h3 id="Server端"><a href="#Server端" class="headerlink" title="Server端"></a>Server端</h3><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;brpc/server.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"add.pb.h"</span></span>
+
+<span class="hljs-comment">// implementation of AddService</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddServiceImpl</span> :</span> <span class="hljs-keyword">public</span> AddService &#123;
+<span class="hljs-keyword">public</span>:
+    AddServiceImpl() &#123;&#125;;
+    <span class="hljs-keyword">virtual</span> ~AddServiceImpl() &#123;&#125;;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Add</span><span class="hljs-params">(google::protobuf::RpcController* cntl_base,</span></span>
+<span class="hljs-function"><span class="hljs-params">                     <span class="hljs-keyword">const</span> AddRequest* request,</span></span>
+<span class="hljs-function"><span class="hljs-params">                     AddResponse* response,</span></span>
+<span class="hljs-function"><span class="hljs-params">                     google::protobuf::Closure* done)</span> </span>&#123;
+        <span class="hljs-function">brpc::ClosureGuard <span class="hljs-title">done_guard</span><span class="hljs-params">(done)</span></span>;
+        brpc::Controller* cntl = <span class="hljs-keyword">static_cast</span>&lt;brpc::Controller*&gt;(cntl_base);
+
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"request form ["</span> &lt;&lt; cntl-&gt;remote_side()
+                  &lt;&lt; <span class="hljs-string">"] to ["</span> &lt;&lt; cntl-&gt;local_side() &lt;&lt; <span class="hljs-string">"]: "</span>;
+        <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;
+
+        <span class="hljs-comment">// Parse request and calculate call result</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; request-&gt;adds_size(); ++i) &#123;
+            <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; request-&gt;adds(i) &lt;&lt; <span class="hljs-string">", "</span>;
+            result += request-&gt;adds(i);
+        &#125;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+
+        <span class="hljs-comment">// Pack result</span>
+        response-&gt;set_result(result);
+    &#125;
+&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span> </span>&#123;
+    brpc::<span class="hljs-built_in">Server</span> server;
+    AddServiceImpl add_service_impl;
+
+    <span class="hljs-comment">// Add the service into server.</span>
+    <span class="hljs-keyword">if</span> (server.AddService(&amp;add_service_impl,
+                          brpc::SERVER_DOESNT_OWN_SERVICE) != <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">"Fail to add service"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+
+    <span class="hljs-comment">// Start the server.</span>
+    brpc::ServerOptions options;
+    options.idle_timeout_sec = <span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">if</span> (server.Start(<span class="hljs-number">8000</span>, &amp;options) != <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">"Fail to start EchoServer"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+
+    server.RunUntilAskedToQuit();
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<p>Server端添加Add Service后启动Server，等待被调用。当接收到Client端stub发来的消息时，解析request参数，执行相关过程，最后将结果打包回传。</p>
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p>Server端：</p>
+<pre><code class="hljs shell">» ./server
+I0412 15:31:48   775 src/brpc/server.cpp:1045] Server[AddServiceImpl] is serving on port=8000.
+I0412 15:31:48   775 src/brpc/server.cpp:1048] Check out http://barrierys-MBP.local:8000 in web browser.
+request form [127.0.0.1:51830] to [127.0.0.1:8000]: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,</code></pre>
+
+<p>Client端：</p>
+<pre><code class="hljs shell">» ./client
+get: 4950</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/rpc/">rpc</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/15/C-11-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E4%B8%8E%E8%BD%AC%E7%A7%BB%E8%AF%AD%E4%B9%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[WIP] C++11: 右值引用与转移语义</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/02/%E5%9C%A8Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E4%BD%BF%E7%94%A8Host%E4%BB%A3%E7%90%86/">
+                        <span class="hidden-mobile">在Docker容器中使用Host代理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "RPC初探: 基于brpc写一个简单的Add服务&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>获取小米运动APP体重数据 - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-01-10 01:57">
+                    星期五, 一月 10日 2020, 1:57 凌晨
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>王大佬说想看体重变化曲线，但小米运动App不能看长时间段的曲线，并且App中数据没有对外提供接口，故有了这篇文章。</p>
+<a id="more"></a>
+
+
+
+<h2 id="获取备份文件"><a href="#获取备份文件" class="headerlink" title="获取备份文件"></a>获取备份文件</h2><h4 id="方法一-用ADB方式获取备份文件"><a href="#方法一-用ADB方式获取备份文件" class="headerlink" title="方法一 - 用ADB方式获取备份文件"></a>方法一 - 用ADB方式获取备份文件</h4><ol>
+<li><p>下载adb</p>
+<blockquote>
+<p>see: <a href="https://stackoverflow.com/questions/31374085/installing-adb-on-macos" target="_blank" rel="noopener">https://stackoverflow.com/questions/31374085/installing-adb-on-macos</a></p>
+</blockquote>
+</li>
+<li><p>进入<code>adb shell</code></p>
+<pre><code class="hljs bash">adb shell</code></pre>
+</li>
+<li><p>查找app名称</p>
+<pre><code class="hljs bash">ls mnt/sdcard/Android/data | grep <span class="hljs-string">'xiaomi'</span></code></pre>
+</li>
+<li><p>备份app数据</p>
+<pre><code class="hljs bash">adb backup -f xm.ab com.xiaomi.hm.health</code></pre>
+</li>
+<li><p>解包</p>
+<blockquote>
+<p>see: <a href="https://stackoverflow.com/questions/18533567/how-to-extract-or-unpack-an-ab-file-android-backup-file" target="_blank" rel="noopener">https://stackoverflow.com/questions/18533567/how-to-extract-or-unpack-an-ab-file-android-backup-file</a></p>
+</blockquote>
+<pre><code class="hljs bash">java -jar abe-all.jar unpack xm.ab xm.rar</code></pre>
+
+</li>
+</ol>
+<p>但是发现获得的备份文件是空的，查了下资料发现国内一些应用禁止了备份操作，所以我选择了另一种方式。</p>
+<h4 id="方法二-用系统自带备份方案获取备份文件"><a href="#方法二-用系统自带备份方案获取备份文件" class="headerlink" title="方法二 - 用系统自带备份方案获取备份文件"></a>方法二 - 用系统自带备份方案获取备份文件</h4><p>我用的一加手机，系统自带一加搬家应用，可以用来获取备份文件。</p>
+<h2 id="解析获取数据"><a href="#解析获取数据" class="headerlink" title="解析获取数据"></a>解析获取数据</h2><p>将备份文件解压后找到体重数据库文件<code>data/data/com.xiaomi.hm.health/databases/origin_db_c958f7a915bd74127753f190bbd6adf6</code>，体重数据存储在<code>WEIGHT_INFOS</code>表中。</p>
+<pre><code class="hljs python"><span class="hljs-comment">#-*- coding:utf8 -*-</span>
+<span class="hljs-comment"># Copyright (c) 2019 barriery</span>
+<span class="hljs-comment"># Python release: 3.7.0</span>
+<span class="hljs-keyword">import</span> sqlite3
+<span class="hljs-keyword">import</span> datetime
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_data</span><span class="hljs-params">(filename)</span>:</span>
+    data = [] <span class="hljs-comment"># (date, weight, BMI)</span>
+    <span class="hljs-keyword">with</span> sqlite3.connect(filename) <span class="hljs-keyword">as</span> conn:
+        c = conn.cursor()
+        cursor = c.execute(<span class="hljs-string">'SELECT * from WEIGHT_INFOS'</span>)
+        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> cursor:
+            date = datetime.datetime.fromtimestamp(row[<span class="hljs-number">0</span>]/<span class="hljs-number">1000</span>)
+            weight = row[<span class="hljs-number">1</span>]
+            BMI = row[<span class="hljs-number">10</span>]
+            data.append((date, weight, BMI))
+
+    date_array, weight_array, BMI_array = [], [], []
+    <span class="hljs-keyword">for</span> date, weight, BMI <span class="hljs-keyword">in</span> data:
+        date_array.append(date)
+        weight_array.append(weight)
+        BMI_array.append(BMI)
+    <span class="hljs-keyword">return</span> date_array, weight_array, BMI_array
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_idxes</span><span class="hljs-params">(data)</span>:</span>
+    rdate, rweight, rBMI = data
+    rdate = [datetime.datetime.strptime(x.strftime(<span class="hljs-string">'%Y-%m-%d'</span>), <span class="hljs-string">'%Y-%m-%d'</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> rdate]
+    idxes = []
+    fdate, fweight, fBMI = [], [], []
+
+    days, idx = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>
+    begin, end = rdate[<span class="hljs-number">0</span>], rdate[<span class="hljs-number">-1</span>]
+    now = begin
+    <span class="hljs-keyword">while</span> now != end:
+        <span class="hljs-keyword">while</span> idx &lt; len(rdate) <span class="hljs-keyword">and</span> now &gt; rdate[idx]:
+            idx += <span class="hljs-number">1</span>
+        <span class="hljs-keyword">if</span> idx &lt; len(rdate) <span class="hljs-keyword">and</span> now == rdate[idx]:
+            idxes.append(days)
+            fdate.append(rdate[idx].strftime(<span class="hljs-string">'%Y-%m-%d'</span>))
+            fweight.append(rweight[idx])
+            fBMI.append(rBMI[idx])
+        days += <span class="hljs-number">1</span>
+        now = begin + datetime.timedelta(days=days)
+    <span class="hljs-keyword">return</span> idxes, (fdate, fweight, fBMI)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">draw</span><span class="hljs-params">(idxes, data)</span>:</span>
+    date, weight, BMI = data
+    plt.plot(idxes, weight, <span class="hljs-string">'.:'</span>)
+    interval = len(idxes) // <span class="hljs-number">10</span>
+    plt.xticks(idxes[::interval], date[::interval], rotation=<span class="hljs-number">45</span>)
+    plt.xlabel(<span class="hljs-string">"date"</span>)
+    plt.ylabel(<span class="hljs-string">"weight(kg)"</span>)
+    plt.show()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    filename = <span class="hljs-string">'origin_db_c958f7a915bd74127753f190bbd6adf6'</span>
+    data = get_data(filename)
+    idxes, fdata = get_idxes(data)
+    draw(idxes, fdata)</code></pre>
+
+
+
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9mrm4iui3j31dp0u00tr.jpg" srcset="/img/loading.gif" alt="weight"></p>
+<h2 id="关于Python的日期操作"><a href="#关于Python的日期操作" class="headerlink" title="关于Python的日期操作"></a>关于Python的日期操作</h2><p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9mc5jcezsj30jv070dfw.jpg" srcset="/img/loading.gif" alt="struct_time"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9mbwzn1bsj30go06wjrj.jpg" srcset="/img/loading.gif" alt="datetime"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.twblogs.net/a/5d874d93bd9eee5327000b75/zh-cn" target="_blank" rel="noopener">https://www.twblogs.net/a/5d874d93bd9eee5327000b75/zh-cn</a></p>
+<p><a href="https://www.open-open.com/lib/view/open1479363382807.html" target="_blank" rel="noopener">https://www.open-open.com/lib/view/open1479363382807.html</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/22/%E9%80%9A%E8%BF%87frp%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">通过frp进行内网穿透</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2019/09/29/macOS%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">macOS静态编译问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "获取小米运动APP体重数据&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

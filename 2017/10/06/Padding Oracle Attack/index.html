@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>Padding Oracle Attack - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2017-10-06 15:25">
+                    星期五, 十月 6日 2017, 3:25 下午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>padding-oracle attack in C language.</p>
+<a id="more"></a>
+
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>In this assignment, you must decrypt a challenge ciphertext generated using AES in CBC-mode with PKCS #5 padding. (Note: technically this is PKCS #7 padding,since the block size of AES is 16 bytes. But the padding is done in exactly the same way as PKCS #5 padding.) To do so, you will be given access to a server that will decrypt any ciphertexts you send it (using the same key that was used to generate the challenge ciphertext)…but that will only tell you whether or not decryption results in an error! </p>
+<p>要求解密一个CBC工作模式，PKCS #7方式填充，AES加密的挑战密文。为此，你需要访问一个服务器（该服务器能用挑战密钥解密任何你发送的密文），它将返回你发送的密文是否填充正确。</p>
+<p>All the files needed for this assignment are available here, including a README file that should explain everything. </p>
+<p>此作业所需的所有文件都已<a href="http://oqx4hhfj3.bkt.clouddn.com/PA2-AES.rar" target="_blank" rel="noopener">在这里</a>给出，包括一个解释一切的README文件。</p>
+<p>Note that this assignment requires the ability to perform basic networking. Because we do not assume students necessarily know this, we have provided stub code for doing basic networking in C, Java, Ruby, and Python, but you are welcome to use any language of your choice as long as you are able to write code for basic networking functionality in that language. (Students may feel free to post stub code in other languages for the networking component on the discussion boards.)</p>
+<p>注意到此作业需要执行基本网络的功能。因为我们不要求学生必须知道这一点，所以我们提供了在C，Java，Ruby和Python中进行基本网络连接的存根代码，但是欢迎使用任何您选择的语言，只要您能够编写代码该语言的基本网络功能。（学生可以自由地在讨论板上为其他语言的网络组件发布存根代码。）</p>
+<p>The first step in this project is to send the challenge ciphertext to the server, and verify that you receive back a “no error” message. Once you can do that, the rest is “just” crypto… </p>
+<p>该项目的第一步是将挑战密文发送到服务器，并验证您是否收到“无错误”消息。一旦你可以做到这一点，其余的是“只是”加密…</p>
+<p>The plaintext,when converted to ASCII, is readable English text, and so you should be able to tell once you have been successful. Once you have successfully recovered the plaintext (in ASCII).</p>
+<p>明文转换为ASCII时，是可读的英文文本，所以一旦成功恢复明文，便可得知。</p>
+<h2 id="前置技能"><a href="#前置技能" class="headerlink" title="前置技能"></a>前置技能</h2><h3 id="CBC工作模式"><a href="#CBC工作模式" class="headerlink" title="CBC工作模式"></a>CBC工作模式</h3><p>CBC模式即密码分组链接模式（Cipher-block chaining）。在该模式中，每个明文块先与前一个密文块进行异或后，再进行加密。在这种方法中，每个密文块都依赖于它前面的所有明文块。同时，为了保证每条消息的唯一性，在第一个块中需要使用初始化向量。</p>
+<p>加密过程：</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g632zeiqchj30go06r74e.jpg" srcset="/img/loading.gif" alt="Cbc_encryption"></p>
+<p>解密过程：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g632zyrnavj30go06674d.jpg" srcset="/img/loading.gif" alt="Cbc_decryption"></p>
+<p>以上内容参考自<a href="https://zh.wikipedia.org/wiki/分组密码工作模式" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/分组密码工作模式</a></p>
+<h3 id="PKCS-7填充"><a href="#PKCS-7填充" class="headerlink" title="PKCS #7填充"></a>PKCS #7填充</h3><p>以整字节填充。每个填充字节的值是用于填充的字节数，即是说，添加N个字节，每个的值都是N。 填充的字节数取决于信息末尾到块边缘的距离。</p>
+<p>下例中，块大小为 8 字节，需要填充 4 字节：</p>
+<pre><code class="hljs plain">... | DD DD DD DD DD DD DD DD | DD DD DD DD 04 04 04 04 |</code></pre>
+
+<p>以上内容参考自<a href="https://zh.wikipedia.org/wiki/%E5%A1%AB%E5%85%85_(%E5%AF%86%E7%A0%81%E5%AD%A6)" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/填充_(密码学) </a></p>
+<h2 id="padding-oracle-attack攻击原理"><a href="#padding-oracle-attack攻击原理" class="headerlink" title="padding-oracle attack攻击原理"></a>padding-oracle attack攻击原理</h2><p>padding-oracle attack针对CBC工作模式攻击，与具体加密算法无关。</p>
+<p>服务器判断Padding是否出错一般从后开始检验明文末尾字节的值，若末尾为<code>0x01</code> 则仅填充了一位，填充末尾为<code>0x03</code> 则末尾三字节均为<code>0x03</code> 。利用服务器的返回值，可以在不知道密钥的情况下得到明文。</p>
+<p>例如现在有一个CBC工作模式，PKCS #7方式填充的密文IV||C（分组大小为8字节）：</p>
+<pre><code class="hljs plain">... | 21 A2 DD 04 35 0A BA 58 | CD DD AA DD 34 23 A1 64 |</code></pre>
+
+<p>为了方便描述，用$C[i]$ 表示第$i$ 个分组，$C[i][j]$ 表示第$i$ 个分组第$j$ 个字节，$D(*)$ 表示解密算法。</p>
+<p>我们想要解密最后一个分组$C[n]$ ，即求$P[n]$ 。</p>
+<p>先求明文最后一个分组的最后一位，即$P[n][6]$ 。</p>
+<p>假设此时仅填充一个字节，构造初始向量$IV$ 值为：</p>
+<pre><code class="hljs plain">| 00 00 00 00 00 00 00 00 |</code></pre>
+
+<p>向服务器发送这两个分组构成的密文$IV||C[n]$ ：</p>
+<pre><code class="hljs plain">| 00 00 00 00 00 00 00 00 | CD DD AA DD 34 23 A1 64 |</code></pre>
+
+<p>要使服务器的返回值为$1$ （即显示Padding正确），那么明文最后一位应该为$0X01$ 。</p>
+<p>明文末尾一位即$D(C[n][6]) \otimes IV[6]$ ，服务器返回值为$D(C[n][6]) \otimes IV[6] == 0X01$。</p>
+<p>此时，需要遍历$[0,256)$ 修改$IV[6]$ 的值，直到服务器的返回值为$1$ 。</p>
+<p>假设此时初始向量$IV$ 为：</p>
+<pre><code class="hljs plain">| 00 00 00 00 00 00 00 A0 |</code></pre>
+
+<p>那么$D(C[n][6]) \otimes IV[6] = 0X01$ ，于是可以得到$D(C[n][6]) = 0X01 \otimes IV[6]$ ，</p>
+<p>即$P[n][6] = D(C[n][6]) \otimes C[n-1][6] = 0X01 \otimes IV[6] \otimes C[n-1][6]$ 。</p>
+<p>至此，明文最后一个分组的最后一位已经得到，接下来求明文最后一个分组的倒数第二位。</p>
+<p>此时假设填充了两个字节，即明文末尾两位均为$0X02$ 。</p>
+<p>由于$D(C[n][6]) \otimes IV[6] = 0X01$ ，所以当$D(C[n][6]) \otimes IV^{‘}[6] = 0X02$ 时，</p>
+<p>$IV^{‘}[6] = D(C[n][6]) \otimes 0X02 = 0X01 \otimes IV[6] \otimes 0X02$ .</p>
+<p>此时的初始向量$IV^{‘}$ 为：</p>
+<pre><code class="hljs plain">| 00 00 00 00 00 00 00 A3 |</code></pre>
+
+<p>遍历$[0,256)$ 修改$IV^{‘}[5]$ 的值，直到服务器的返回值为$1$ 。</p>
+<p>于是$D(C[n][5]) \otimes IV^{‘}[5] = 0X02$ ，即$D(C[n][5]) = 0X02 \otimes IV^{‘}[5]$ ，</p>
+<p>那么$P[n][5] = D(C[n][5]) \otimes C[n-1][5] = 0X02 \otimes IV^{‘}[5] \otimes C[n-1][5]$ 。</p>
+<p>明文最后一个分组的倒数第二位也已经得到。</p>
+<p>依次类推，由此即可以仅根据密文还原出明文。</p>
+<p>以上内容参考自<a href="http://www.freebuf.com/articles/web/15504.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/15504.html</a></p>
+<h2 id="连接服务器并测试"><a href="#连接服务器并测试" class="headerlink" title="连接服务器并测试"></a>连接服务器并测试</h2><blockquote>
+<p>The first step in this project is to send the challenge ciphertext to the server, and verify that you receive back a “no error” message. Once you can do that, the rest is “just” crypto… </p>
+</blockquote>
+<p>题目给出了很多文件，我们需要的只有<code>sample.c</code> ，<code>oracle.h</code>和<code>oracle.c</code> 。</p>
+<h3 id="修改服务器地址和端口"><a href="#修改服务器地址和端口" class="headerlink" title="修改服务器地址和端口"></a>修改服务器地址和端口</h3><p>本课程的服务器地址和端口已修改为<code>128.8.130.16</code> ，<code>49101</code> 。</p>
+<p>在<code>oracle.c</code>中修改<code>servaddr.sin_addr.s_addr</code>和<code>servaddr.sin_port</code> 。</p>
+<h3 id="创建makefile文件"><a href="#创建makefile文件" class="headerlink" title="创建makefile文件"></a>创建makefile文件</h3><p>在文件夹目录下创建<code>makefile</code> ：</p>
+<pre><code class="hljs shell">sample: sample.o oracle.o
+	gcc -o sample oracle.o sample.o; rm sample.o
+
+sample.o: sample.c
+	gcc -c sample.c
+
+oracle.o: oracle.c oracle.h
+	gcc -c oracle.c
+
+clean:
+	rm -rf *.o sample</code></pre>
+
+<h3 id="编译文件并尝试连接服务器"><a href="#编译文件并尝试连接服务器" class="headerlink" title="编译文件并尝试连接服务器"></a>编译文件并尝试连接服务器</h3><p>在命令行窗口输入：</p>
+<pre><code class="hljs shell">make</code></pre>
+
+<p>得到可运行文件<code>sample</code> 。</p>
+<p>尝试连接服务器并发送挑战密文进行测试：</p>
+<pre><code class="hljs shel">.&#x2F;sample challenge-ciphertext.txt</code></pre>
+
+<p>若返回值<code>ret</code> 等于1，则表示连接成功且发送的密文正确填充（挑战密文保证正确填充）。接下来只需要修改<code>sample.c</code> 文件进行padding-oracle attack攻击。</p>
+<h2 id="改写sample文件"><a href="#改写sample文件" class="headerlink" title="改写sample文件"></a>改写sample文件</h2><p>模拟一下原理中的逻辑：</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"oracle.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ciphertext[<span class="hljs-number">3</span>][<span class="hljs-number">16</span>]=&#123;
+  &#123;<span class="hljs-number">159</span>,<span class="hljs-number">11</span>,<span class="hljs-number">19</span>,<span class="hljs-number">148</span>,<span class="hljs-number">72</span>,<span class="hljs-number">65</span>,<span class="hljs-number">168</span>,<span class="hljs-number">50</span>,<span class="hljs-number">178</span>,<span class="hljs-number">66</span>,<span class="hljs-number">27</span>,<span class="hljs-number">158</span>,<span class="hljs-number">175</span>,<span class="hljs-number">109</span>,<span class="hljs-number">152</span>,<span class="hljs-number">54</span>&#125;,
+  &#123;<span class="hljs-number">129</span>,<span class="hljs-number">62</span>,<span class="hljs-number">201</span>,<span class="hljs-number">217</span>,<span class="hljs-number">68</span>,<span class="hljs-number">165</span>,<span class="hljs-number">200</span>,<span class="hljs-number">52</span>,<span class="hljs-number">122</span>,<span class="hljs-number">124</span>,<span class="hljs-number">166</span>,<span class="hljs-number">154</span>,<span class="hljs-number">163</span>,<span class="hljs-number">77</span>,<span class="hljs-number">141</span>,<span class="hljs-number">192</span>&#125;,
+  &#123;<span class="hljs-number">223</span>,<span class="hljs-number">112</span>,<span class="hljs-number">227</span>,<span class="hljs-number">67</span>,<span class="hljs-number">196</span>,<span class="hljs-number">0</span>,<span class="hljs-number">10</span>,<span class="hljs-number">42</span>,<span class="hljs-number">227</span>,<span class="hljs-number">88</span>,<span class="hljs-number">116</span>,<span class="hljs-number">206</span>,<span class="hljs-number">117</span>,<span class="hljs-number">230</span>,<span class="hljs-number">76</span>,<span class="hljs-number">49</span>&#125;
+&#125;;
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> ctext[<span class="hljs-number">32</span>], plaintext[<span class="hljs-number">48</span>], xor_iv[<span class="hljs-number">16</span>];
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>&#123;
+  <span class="hljs-keyword">int</span> i, j, k, ret;
+  <span class="hljs-built_in">memset</span>(ctext, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(ctext) );
+  <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">16</span>; ++i) ctext[<span class="hljs-number">16</span>+i] = ciphertext[p][i];
+  <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">16</span>; ++i) &#123;
+    <span class="hljs-keyword">for</span> (j=<span class="hljs-number">0</span>; j&lt;i; ++j) ctext[<span class="hljs-number">15</span>-j] = xor_iv[<span class="hljs-number">15</span>-j] ^ (i+<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (j=<span class="hljs-number">0</span>; j&lt;<span class="hljs-number">256</span>; ++j) &#123;
+      ctext[<span class="hljs-number">15</span>-i] = j;
+      ret = Oracle_Send(ctext, <span class="hljs-number">2</span>);
+      <span class="hljs-keyword">if</span> (ret == <span class="hljs-number">1</span>) &#123;
+        xor_iv[<span class="hljs-number">15</span>-i] = j ^ (i+<span class="hljs-number">1</span>);
+        plaintext[<span class="hljs-number">16</span>*p+<span class="hljs-number">15</span>-i] = xor_iv[<span class="hljs-number">15</span>-i] ^ ciphertext[p<span class="hljs-number">-1</span>][<span class="hljs-number">15</span>-i];
+        <span class="hljs-keyword">break</span>;
+      &#125;
+    &#125;
+  &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span> </span>&#123;
+  <span class="hljs-keyword">int</span> i, ret;
+  Oracle_Connect();
+  <span class="hljs-keyword">for</span> (i=<span class="hljs-number">1</span>; i&lt;<span class="hljs-number">3</span>; ++i) solve(i);
+  freopen(<span class="hljs-string">"plaintext.txt"</span>, <span class="hljs-string">"w"</span>, <span class="hljs-built_in">stdout</span>);
+  <span class="hljs-keyword">for</span> (i=<span class="hljs-number">16</span>; i&lt;<span class="hljs-number">48</span>; ++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, plaintext[i]);
+  fclose(<span class="hljs-built_in">stdout</span>);
+  Oracle_Disconnect();
+&#125;</code></pre>
+
+<p>编译后运行：</p>
+<pre><code class="hljs shell">./sample</code></pre>
+
+<p>得到明文<code>plaintext.txt</code> ：</p>
+<pre><code class="hljs plain">Yay! You get an A. &#x3D;)</code></pre>
+
+
+
+
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/03/10/%E7%94%A8Arch%20Live%E4%BF%AE%E5%A4%8DArch/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">用Arch Live修复Arch</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2017/09/12/2017%20ACMICPC%20Asia%20Regional%20Shenyang%20Online%20F.gems%20gems%20gems/">
+                        <span class="hidden-mobile">2017 ACMICPC Asia Regional Shenyang Online F.gems gems gems</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Padding Oracle Attack&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

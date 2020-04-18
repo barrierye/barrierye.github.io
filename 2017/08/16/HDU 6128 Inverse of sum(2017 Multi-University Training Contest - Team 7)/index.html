@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>HDU6128 Inverse of sum(2017 Multi-University Training Contest - Team 7) - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2017-08-16 19:54">
+                    星期三, 八月 16日 2017, 7:54 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6128" target="_blank" rel="noopener">HDU 6128 : Inverse of sum</a></p>
+<a id="more"></a>
+
+
+
+<blockquote>
+<p>题目大意：有$n$ 个小于质数$p$ 的非负整数$a_i$ ，你想知道有多少对$i,j(1 \leqslant i&lt;j\leqslant n)$ ，使得模$p$ 意义下$\frac{1}{a_i+a_j} \equiv \frac{1}{a_i}+\frac{1}{a_j}$ ，即这两数的和的逆元等于它们逆元的和，注意零元没有逆元。</p>
+</blockquote>
+<h3 id="二次剩余"><a href="#二次剩余" class="headerlink" title="二次剩余"></a>二次剩余</h3><p>$$<br>(a+b)^{-1} \equiv a^{-1}+b^{-1}(mod , p)\\<br>1 \equiv (a+b)(a^{-1}+b^{-1})(mod , p)\\<br>a^{-1}b+ab^{-1}+1 \equiv 0(mod , p)\\<br>a^2+b^2+ab\equiv 0 (mod , p)\\<br>(ab^{-1})^2+(ab^{-1})+1\equiv 0 (mod , p)\\<br>ab^{-1}\equiv \frac{-1\pm\sqrt{-3}}{2}(mod , p)<br>$$</p>
+<p>故原式等价于模$p$ 意义下，两数之比为$\frac{-1\pm\sqrt{-3}}{2}$ ，根号可以用二次剩余解决。</p>
+<p>下面分类考虑几种情况：</p>
+<ul>
+<li>$p=2$ ，此时可以直接求得$-3$ 的二次剩余是$1$ </li>
+<li>$(\frac{-3}{p})=1$ ，套用上述公式遍历一遍数组可求得</li>
+<li>$(\frac{-3}{p})=-1$ ，即$-3$ 在模$p$ 下不存在二次剩余，故不存在满足条件的对</li>
+<li>$(\frac{-3}{p})=0$ ，即$p|-3$ ，此时$\sqrt{-3} \equiv 0 (mod , p)$ </li>
+</ul>
+<p>需要注意的是，此题会出现long long相乘溢出的情况，可以用快速乘处理。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ctime&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N=<span class="hljs-number">100005</span>;
+ll T,n,p,w,a[N];
+<span class="hljs-built_in">map</span>&lt;ll,ll&gt;mp;
+<span class="hljs-function">ll <span class="hljs-title">Min</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;
+    <span class="hljs-keyword">return</span> a&lt;b?a:b;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">Mul</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;
+    ll r=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(b)&#123;
+        <span class="hljs-keyword">if</span>(b&amp;<span class="hljs-number">1</span>)r=(r+a)%p;
+        a=(a+a)%p;
+        b&gt;&gt;=<span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> r;
+&#125;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Complex</span>&#123;</span>
+    ll x,y;
+    Complex <span class="hljs-keyword">friend</span> <span class="hljs-keyword">operator</span>*(Complex x,Complex y)&#123;
+        Complex z;
+        z.x=(Mul(x.x,y.x)+Mul(Mul(x.y,y.y),w))%p;
+        z.y=(Mul(x.y,y.x)+Mul(x.x,y.y))%p;
+        <span class="hljs-keyword">return</span> z;
+    &#125;
+&#125;;
+<span class="hljs-function">ll <span class="hljs-title">powmod</span><span class="hljs-params">(ll a,ll n)</span></span>&#123;
+    ll r=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span>(n)&#123;
+        <span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>)r=Mul(r,a);
+        a=Mul(a,a);
+        n&gt;&gt;=<span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> r;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">ComPow</span><span class="hljs-params">(Complex a,ll n)</span></span>&#123;
+    Complex r;
+    r.x=<span class="hljs-number">1</span>;r.y=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(n)&#123;
+        <span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>)r=r*a;
+        a=a*a;
+        n&gt;&gt;=<span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> Min(r.x%p,(p-r.x%p)%p);
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">Cipolla</span><span class="hljs-params">(ll a,ll p)</span></span>&#123;
+    ll x=rand()%p;
+    <span class="hljs-keyword">while</span>(powmod((Mul(x,x)-a+p)%p,(p<span class="hljs-number">-1</span>)/<span class="hljs-number">2</span>)!=p<span class="hljs-number">-1</span>)
+        x=rand()%p;
+    w=(Mul(x,x)-a+p)%p;
+    Complex t;
+    t.x=x;t.y=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> ComPow(t,(p+<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>);
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">solve</span><span class="hljs-params">(ll rd,ll p)</span></span>&#123;
+    mp.<span class="hljs-built_in">clear</span>();
+    ll ans=<span class="hljs-number">0</span>;
+    ll x=Mul(((<span class="hljs-number">-1</span>+rd)%p+p)%p,powmod(<span class="hljs-number">2</span>,p<span class="hljs-number">-2</span>));
+    ll y=Mul(((<span class="hljs-number">-1</span>-rd)%p+p)%p,powmod(<span class="hljs-number">2</span>,p<span class="hljs-number">-2</span>));
+    <span class="hljs-keyword">if</span>(x==y)&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=n<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;--i)<span class="hljs-keyword">if</span>(a[i]%p)&#123;
+            ll b=Mul(a[i],x);
+            <span class="hljs-keyword">if</span>(mp.count(b))ans+=mp[b];
+            mp[a[i]%p]++;
+        &#125;
+    &#125;<span class="hljs-keyword">else</span>&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=n<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;--i)<span class="hljs-keyword">if</span>(a[i]%p)&#123;
+            ll bx=Mul(a[i],x),by=Mul(a[i],y);
+            <span class="hljs-keyword">if</span>(mp.count(bx))ans+=mp[bx];
+            <span class="hljs-keyword">if</span>(mp.count(by))ans+=mp[by];
+            mp[a[i]%p]++;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    <span class="hljs-built_in">cin</span>&gt;&gt;T;
+    <span class="hljs-keyword">while</span>(T--)&#123;
+        <span class="hljs-built_in">cin</span>&gt;&gt;n&gt;&gt;p;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;n;++i)
+            <span class="hljs-built_in">cin</span>&gt;&gt;a[i];
+        ll ans;
+        <span class="hljs-keyword">if</span>(p==<span class="hljs-number">2</span>)&#123;
+            ans=solve(<span class="hljs-number">1</span>,p);
+        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(powmod(p<span class="hljs-number">-3</span>,(p<span class="hljs-number">-1</span>)/<span class="hljs-number">2</span>)==<span class="hljs-number">1</span>)&#123;
+            ll rd=Cipolla(p<span class="hljs-number">-3</span>,p);
+            ans=solve(rd,p);
+        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(powmod(p<span class="hljs-number">-3</span>,(p<span class="hljs-number">-1</span>)/<span class="hljs-number">2</span>)==<span class="hljs-number">0</span>)&#123;
+            ans=solve(<span class="hljs-number">0</span>,p);
+        &#125;<span class="hljs-keyword">else</span> ans=<span class="hljs-number">0</span>;
+        <span class="hljs-built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="hljs-string">"\n"</span>;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h3 id="立方公式"><a href="#立方公式" class="headerlink" title="立方公式"></a>立方公式</h3><p>除了用二次剩余还有另一种更优雅的解法。<br>$$<br>(a+b)^{-1} \equiv a^{-1}+b^{-1}(mod , p)\\<br>1 \equiv (a+b)(a^{-1}+b^{-1})(mod , p)\\<br>a^{-1}b+ab^{-1}+1 \equiv 0(mod , p)\\<br>a^2+b^2+ab\equiv 0 (mod , p)\\<br>$$<br>当$a-b \not \equiv 0 (mod , p)$ 时，可以在上述等式两边同乘上$a-b$ ，得到<br>$$<br>(a-b)(a^2+ab+b^2)\equiv 0 (mod ,p)\\<br>a^3-b^3\equiv0(mod , p)<br>$$<br>如此只需记录当$a \not\equiv b(mod ,p)$ 时，所有满足$a^3-b^3\equiv 0 (mod ,p)$ 的对数即可。</p>
+<p><a href="http://www.cnblogs.com/bin-gege/p/7367337.html" target="_blank" rel="noopener">查看代码</a> 。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Acm/">Acm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E8%AE%BA/">数论</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E6%AC%A1%E5%89%A9%E4%BD%99/">二次剩余</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/08/19/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94%E7%BB%83%E4%B9%A0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">莫比乌斯反演练习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2017/07/20/ProjectEuler/">
+                        <span class="hidden-mobile">ProjectEuler</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "HDU6128 Inverse of sum(2017 Multi-University Training Contest - Team 7)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

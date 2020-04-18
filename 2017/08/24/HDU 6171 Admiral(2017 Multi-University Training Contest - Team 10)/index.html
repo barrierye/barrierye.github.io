@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>HDU 6171 Admiral(2017 Multi-University Training Contest - Team 10) - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2017-08-24 22:15">
+                    星期四, 八月 24日 2017, 10:15 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6171" target="_blank" rel="noopener">HDU 6171 Admiral</a></p>
+<a id="more"></a>
+
+
+
+<blockquote>
+<p>题目大意：给定一个高度为$6$ 的数塔，问最少多少步能走成原始状态。大于$20$ 步直接输出“too difficult”! </p>
+<p>每次只能将值为$0$ 的点与其左上，上方，下方，右下四个方向的一个点进行交换。 </p>
+</blockquote>
+<h3 id="双向BFS"><a href="#双向BFS" class="headerlink" title="双向BFS"></a>双向BFS</h3><p>利用中间相遇法，从给定状态和原始状态出发进行BFS。</p>
+<p>复杂度$O(4^{\frac{n}{2}})$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unordered_map&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">int</span> T,t,ans,p;
+<span class="hljs-keyword">int</span> fl[<span class="hljs-number">21</span>]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">5</span>,<span class="hljs-number">5</span>&#125;;
+<span class="hljs-keyword">int</span> e[<span class="hljs-number">6</span>]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,<span class="hljs-number">10</span>,<span class="hljs-number">15</span>&#125;;
+ll <span class="hljs-built_in">pow</span>[<span class="hljs-number">22</span>];
+ll sd=<span class="hljs-number">751637788911935</span>;
+<span class="hljs-built_in">unordered_map</span>&lt;ll,<span class="hljs-keyword">int</span>&gt;vis1,vis2;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span>&#123;</span>
+    ll s;
+    <span class="hljs-keyword">int</span> p,d;
+    node(ll S,<span class="hljs-keyword">int</span> P,<span class="hljs-keyword">int</span> D)&#123;
+        s=S;p=P;d=D;
+    &#125;
+&#125;;
+<span class="hljs-built_in">queue</span>&lt;node&gt;q1,q2;
+<span class="hljs-function">ll <span class="hljs-title">swp</span><span class="hljs-params">(ll s,<span class="hljs-keyword">int</span> p,<span class="hljs-keyword">int</span> q)</span></span>&#123;
+    <span class="hljs-keyword">if</span>(p&lt;q)swap(q,p);
+    ll tp=s%<span class="hljs-built_in">pow</span>[p+<span class="hljs-number">1</span>]/<span class="hljs-built_in">pow</span>[p];
+    ll tq=s%<span class="hljs-built_in">pow</span>[q+<span class="hljs-number">1</span>]/<span class="hljs-built_in">pow</span>[q];
+    ll t=s/<span class="hljs-built_in">pow</span>[p+<span class="hljs-number">1</span>]*<span class="hljs-built_in">pow</span>[p+<span class="hljs-number">1</span>]+tq*<span class="hljs-built_in">pow</span>[p]
+        +s%<span class="hljs-built_in">pow</span>[p]/<span class="hljs-built_in">pow</span>[q+<span class="hljs-number">1</span>]*<span class="hljs-built_in">pow</span>[q+<span class="hljs-number">1</span>]+tp*<span class="hljs-built_in">pow</span>[q]+s%<span class="hljs-built_in">pow</span>[q];
+    <span class="hljs-keyword">return</span> t;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bfs</span><span class="hljs-params">(ll s,<span class="hljs-keyword">int</span> p)</span></span>&#123;
+    vis1.<span class="hljs-built_in">clear</span>();vis2.<span class="hljs-built_in">clear</span>();
+    vis1[sd]=<span class="hljs-number">0</span>;vis2[s]=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(!q1.empty())q1.pop();
+    <span class="hljs-keyword">while</span>(!q2.empty())q2.pop();
+    q1.push(node(sd,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>));
+    q2.push(node(s,p,<span class="hljs-number">0</span>));
+    <span class="hljs-keyword">while</span>(!q1.empty()||!q2.empty())&#123;
+        <span class="hljs-keyword">if</span>(!q1.empty())&#123;
+            node t=q1.front();q1.pop();
+            ll s=t.s;
+            <span class="hljs-keyword">int</span> p=t.p,d=t.d;
+            <span class="hljs-keyword">if</span>(vis2.count(s))
+                <span class="hljs-keyword">return</span> d+vis2[s];
+            <span class="hljs-keyword">int</span> pf=fl[p];
+            <span class="hljs-keyword">int</span> f=fl[p]+<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(p-f&gt;=e[pf<span class="hljs-number">-1</span>])&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p-f));
+                <span class="hljs-keyword">if</span>(vis1.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis1[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q1.push(node(ts,p-f,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span>(p&lt;<span class="hljs-number">15</span>)&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p+f));
+                <span class="hljs-keyword">if</span>(vis1.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis1[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q1.push(node(ts,p+f,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span>(p-f+<span class="hljs-number">1</span>&lt;e[f<span class="hljs-number">-1</span>])&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p-f+<span class="hljs-number">1</span>));
+                <span class="hljs-keyword">if</span>(vis1.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis1[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q1.push(node(ts,p-f+<span class="hljs-number">1</span>,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span>(p&lt;<span class="hljs-number">15</span>)&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p+f+<span class="hljs-number">1</span>));
+                <span class="hljs-keyword">if</span>(vis1.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis1[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q1.push(node(ts,p+f+<span class="hljs-number">1</span>,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span>(!q2.empty())&#123;
+            node t=q2.front();q2.pop();
+            ll s=t.s;
+            <span class="hljs-keyword">int</span> p=t.p,d=t.d;
+            <span class="hljs-keyword">if</span>(vis1.count(s))
+                <span class="hljs-keyword">return</span> d+vis1[s];
+            <span class="hljs-keyword">int</span> pf=fl[p];
+            <span class="hljs-keyword">int</span> f=fl[p]+<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(p-f&gt;=e[pf<span class="hljs-number">-1</span>])&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p-f));
+                <span class="hljs-keyword">if</span>(vis2.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis2[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q2.push(node(ts,p-f,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span>(p&lt;<span class="hljs-number">15</span>)&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p+f));
+                <span class="hljs-keyword">if</span>(vis2.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis2[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q2.push(node(ts,p+f,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span>(p-f+<span class="hljs-number">1</span>&lt;e[f<span class="hljs-number">-1</span>])&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p-f+<span class="hljs-number">1</span>));
+                <span class="hljs-keyword">if</span>(vis2.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis2[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q2.push(node(ts,p-f+<span class="hljs-number">1</span>,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span>(p&lt;<span class="hljs-number">15</span>)&#123;
+                ll ts=swp(s,<span class="hljs-number">20</span>-p,<span class="hljs-number">20</span>-(p+f+<span class="hljs-number">1</span>));
+                <span class="hljs-keyword">if</span>(vis2.count(ts)==<span class="hljs-number">0</span>)&#123;
+                    vis2[ts]=d+<span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">if</span>(d&lt;<span class="hljs-number">10</span>)q2.push(node(ts,p+f+<span class="hljs-number">1</span>,d+<span class="hljs-number">1</span>));
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    <span class="hljs-built_in">pow</span>[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">21</span>;++i)
+        <span class="hljs-built_in">pow</span>[i]=<span class="hljs-built_in">pow</span>[i<span class="hljs-number">-1</span>]*<span class="hljs-number">6</span>;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;T);
+    <span class="hljs-keyword">while</span>(T--)&#123;
+        ll s=<span class="hljs-number">0</span>,tot=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">6</span>;++i)&#123;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;i;++j)&#123;
+                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;t);
+                s=s*<span class="hljs-number">6</span>+t;
+                <span class="hljs-keyword">if</span>(t==<span class="hljs-number">0</span>)p=tot;
+                tot++;
+            &#125;
+        &#125;
+        ans=bfs(s,p);
+        <span class="hljs-keyword">if</span>(ans!=<span class="hljs-number">-1</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,ans);
+        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"too difficult\n"</span>);
+    &#125;
+&#125;</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Acm/">Acm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E5%90%91BFS/">双向BFS</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/08/25/HDU%206161%20Big%20binary%20tree(2017%20Multi-University%20Training%20Contest%20-%20Team%208)/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HDU 6161 Big binary tree(2017 Multi-University Training Contest - Team 8)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2017/08/23/HDU%206166%20Senior%20Pan(2017%20Multi-University%20Training%20Contest%20-%20Team%209)/">
+                        <span class="hidden-mobile">HDU 6166 Senior Pan(2017 Multi-University Training Contest - Team 9)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "HDU 6171 Admiral(2017 Multi-University Training Contest - Team 10)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

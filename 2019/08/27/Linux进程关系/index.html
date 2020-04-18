@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>Linux进程关系 - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2019-08-27 15:15">
+                    星期二, 八月 27日 2019, 3:15 下午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>在<a href="https://barriery.cn/2019/08/19/自动部署博客脚本/" target="_blank" rel="noopener">自动部署博客脚本</a>中，我提到了用<code>nohup</code>让程序在后台运行（nohup的原理是使进程不对SIGHUP信号进行处理），并用<code>ps</code>命令查找”auto-blog-submit.sh”的进程号，用<code>kill</code>干掉进程。但这种做法其实存在问题，杀掉”auto-blog-submit.sh”后用<code>ps</code>仍然可以找到”fswatch”的进程，于是就有了这篇文章。</p>
+<a id="more"></a>
+
+<h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>为了便于研究测试，将原脚本简化如下：</p>
+<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span>
+nohup fswatch -o ./<span class="hljs-built_in">test</span> | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span>
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"file changed."</span>
+<span class="hljs-keyword">done</span> &amp;</code></pre>
+
+<p>当上述脚本运行结束后，<code>ps -Ao pid,pgid,ppid,command</code>得到由该脚本启动的进程有两个：</p>
+<pre><code class="hljs bash">  PID  PGID  PPID COMMAND
+24719 24716     1 fswatch -o ./<span class="hljs-built_in">test</span>
+24720 24716     1 sh ./test.sh</code></pre>
+
+<p>这两个进程是怎么来的，如何优雅地杀掉这些进程？就是接下来的内容。</p>
+<h1 id="什么是进程-Process"><a href="#什么是进程-Process" class="headerlink" title="什么是进程 - Process"></a>什么是进程 - Process</h1><p>首先要有进程的概念，进程是程序的具体实现，即执行程序的过程。程序与进程的关系和面向对象语言中的类与实例的关系类似。同个类可以实例化多次；而同个程序也可以执行多次，每次都可以在内存中开辟独立的空间来装载，从而产生多个进程。</p>
+<p>每一个进程都有一个唯一的PID来代表自己的身份，进程也可以根据PID来识别其他的进程。</p>
+<h1 id="进程的创建-fork-amp-exec"><a href="#进程的创建-fork-amp-exec" class="headerlink" title="进程的创建 - fork&amp;exec"></a>进程的创建 - fork&amp;exec</h1><p>当计算机启动时，内核（kernel）只建立了一个init进程。Linux内核并不提供直接建立新进程的系统调用，剩下的所有进程都是init进程通过fork机制建立的。当进程fork的时候，Linux在内存中开辟出一片新的内存空间给新的进程，并将老的进程空间中的内容复制到新的空间中，此后两个进程同时运行。需要注意的是，实际执行fork时，物理空间上两个进程的数据段和堆栈段都还是共享着的，当有一个进程写了某个数据时，这时两个进程之间的数据才有了区别（Copy-on-write）。下面这段代码演示了使用fork的基本框架：</p>
+<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>&#123;
+  <span class="hljs-keyword">if</span>(fork() == <span class="hljs-number">0</span>) &#123;
+    <span class="hljs-comment">// 子进程</span>
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-comment">// 父进程</span>
+  &#125;
+&#125;</code></pre>
+
+<p>通常fork与exec函数簇结合使用来实现一个进程启动另一个程序的执行。exec函数的作用是”启动参数指定的程序，代替自身进程”，如果不配合fork使用，它是”当前进程结束，执行指定进程”；配合fork使用，就成了”当前进程启动另一个进程”。一个进程一旦调用exec类函数，它本身就”死亡”了，系统把代码段替换成新的程序的代码，并为新程序分配新的数据段与堆栈段，唯有进程号不变，对系统而言虽然还是同一个进程，但已经是另一个程序了。下面以exec函数簇中的execlp为例（该程序从终端读入命令并执行，执行完成后父进程继续等待从终端读入命令）：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-keyword">char</span> command[<span class="hljs-number">256</span>];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>&#123;
+  <span class="hljs-keyword">int</span> rtn; <span class="hljs-comment">// 子进程的返回值</span>
+  <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+    <span class="hljs-comment">// 从终端读取要执行的命令</span>
+    fgets(command, <span class="hljs-number">256</span>, <span class="hljs-built_in">stdin</span>);
+    command[<span class="hljs-built_in">strlen</span>(command)<span class="hljs-number">-1</span>] = <span class="hljs-string">'\0'</span>;
+    <span class="hljs-keyword">if</span>(fork() == <span class="hljs-number">0</span>) &#123;
+      <span class="hljs-comment">// 子进程执行此命令</span>
+      execlp(command, <span class="hljs-literal">NULL</span>);
+      perror(command); <span class="hljs-comment">// 如果exec函数返回，则表明命令没有正常执行，打印错误信息</span>
+      <span class="hljs-built_in">exit</span>(errno);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+      <span class="hljs-comment">// 父进程等待子进程结束，并打印子进程的返回值</span>
+      wait(&amp;rtn);
+      <span class="hljs-built_in">printf</span>(<span class="hljs-string">"child process return %d\n"</span>, rtn);
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<p>当一个进程通过fork建立一个新的进程，老进程作为新进程的父进程（parent process），相应的新进程作为老进程的子进程（child process）。一个进程除了有一个PID之外，还会有一个PPID（parent PID）来存储的父进程PID。如果我们循着PPID不断向上追溯的话，总会发现其源头是init进程。所以说，所有的进程也构成一个以init为根的树状结构。</p>
+<h1 id="进程组与会话-Process-Group-amp-Session"><a href="#进程组与会话-Process-Group-amp-Session" class="headerlink" title="进程组与会话 - Process Group&amp;Session"></a>进程组与会话 - Process Group&amp;Session</h1><p>每个进程都会属于一个进程组（process group），每个进程组中可以包含多个进程。进程组的第一个进程即进程组领导进程 （process group leader），领导进程的PID成为进程组ID (process group ID, PGID)，以识别进程组。</p>
+<p>多个进程组还可以构成一个会话 （session），会话通常由登录过程设置。同样，会话的第一个进程即会话领导进程(session leader)，会话领导进程的PID成为识别会话的SID(session ID)。会话中的每个进程组称为一个工作(job)。会话可以有一个进程组成为会话的前台工作(foreground)，而其他的进程组是后台工作(background)。每个会话可以连接一个控制终端(control terminal)。当控制终端有输入输出时，都传递给该会话的前台进程组。由终端产生的信号，比如CTRL+Z， CTRL+\，会传递到前台进程组。</p>
+<p>会话的意义在于将多个工作囊括在一个终端，并取其中的一个工作作为前台，来直接接收该终端的输入输出以及终端信号。 其他工作在后台运行。</p>
+<p>下面这张图说明在一个终端执行下列命令后，各个进程之间的进程组和会话关系：</p>
+<pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> $$                            <span class="hljs-comment"># Display the PID of the shell</span>
+400
+$ find / 2 &gt; /dev/null | wc -l &amp;     <span class="hljs-comment"># Creates 2 processes in background group</span>
+[1] 659
+$ sort &lt; longlist | uniq -c          <span class="hljs-comment"># Creates 2 processes in foreground group</span></code></pre>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6kh3whjqsj31110u0q5z.jpg" srcset="/img/loading.gif" alt="进程组、会话和控制终端之间的关系"></p>
+<p>find, wc, sort, uniq都是bash的子进程，当子进程的父进程终结时，子进程的PPID会发生改变（变为已终结的父进程的PPID）。进程组领导进程的PID即进程组PGID，进程组领导进程可以先终结，此时进程组依然存在，并且PGID不发生改变。会话领导进程的PID即会话SID，当会话领导进程终结时，会向前台进程组中的所有进程发送SIGHUP信号。</p>
+<h1 id="之前的脚本在运行中发生了什么"><a href="#之前的脚本在运行中发生了什么" class="headerlink" title="之前的脚本在运行中发生了什么"></a>之前的脚本在运行中发生了什么</h1><p>回到最开始的问题，如何优雅地杀掉脚本中的进程。</p>
+<p>如果用<code>pstree</code>命令来显示脚本运行过程中的进程树，将得到如下结构：</p>
+<pre><code class="hljs bash">...─┬─...
+    └─sh test.sh─┬─fswatch -o ./<span class="hljs-built_in">test</span>
+                 └─sh test.sh</code></pre>
+
+<p>他们的PID，PGID与PPID如下：</p>
+<pre><code class="hljs bash"> PID  PGID  PPID COMMAND
+5068  5068   599 sh test.sh
+5071  5068  5068 fswatch -o ./<span class="hljs-built_in">test</span>
+5072  5068  5068 sh test.sh</code></pre>
+
+<p>这里PID=5068的<code>sh test.sh</code>进程作为父进程新创建了PID=5072的子进程<code>sh test.sh</code>，这里新进程其实是脚本中的<code>do...while</code>部分。可以看到这些进程同属于同一个进程组，PGID为该进程组的第一个进程的PID即5068。</p>
+<p>当脚本执行结束，PID=5068的父进程终结，进程组依然存在，且PGID不发生改变。两个子进程PPID发生变更：</p>
+<pre><code class="hljs bash">...─┬─fswatch -o ./<span class="hljs-built_in">test</span>
+    └─sh test.sh</code></pre>
+
+<pre><code class="hljs bash"> PID  PGID  PPID COMMAND
+5071  5068     1 fswatch -o ./<span class="hljs-built_in">test</span>
+5072  5068     1 sh test.sh</code></pre>
+
+<p>因此，我们可以根据这些进程在同一个进程组这个特点，一次性将进程组内所有进程kill掉，就达成了目标。</p>
+<h1 id="修改后的自动部署博客脚本"><a href="#修改后的自动部署博客脚本" class="headerlink" title="修改后的自动部署博客脚本"></a>修改后的自动部署博客脚本</h1><p>修改后的脚本在原来弹窗的基础上添加了”Kill Processes”按钮，以便遇到异常直接杀掉进程。同时为了代码复用，我将几个比较通用的函数分离出来，构建一个自己的Helper库。</p>
+<h4 id="auto-blog-submit-sh"><a href="#auto-blog-submit-sh" class="headerlink" title="auto-blog-submit.sh"></a>auto-blog-submit.sh</h4><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span>
+
+. ~/Helper/Bash/plog.sh <span class="hljs-comment"># log function</span>
+. ~/Helper/Bash/showDialog.sh <span class="hljs-comment"># show dialog function</span>
+
+BLOG_PATH=/Users/barriery/Blog/
+LOG_PATH=<span class="hljs-variable">$&#123;BLOG_PATH&#125;</span>/auto-blog-submit.log
+ARTICLE_PATH=<span class="hljs-variable">$&#123;BLOG_PATH&#125;</span>/<span class="hljs-built_in">source</span>/_posts
+
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;BLOG_PATH&#125;</span> <span class="hljs-comment"># Otherwise the script will run in the home path</span>
+<span class="hljs-keyword">if</span> [ ! -f <span class="hljs-variable">$&#123;LOG_PATH&#125;</span> ]; <span class="hljs-keyword">then</span>
+    touch <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+<span class="hljs-keyword">fi</span>
+
+PGID=$$ <span class="hljs-comment"># 当前进程组ID</span>
+plog -t -l OK -c green -m <span class="hljs-string">"Current group process ID is \033[33m<span class="hljs-variable">$&#123;PGID&#125;</span>\033[0m"</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+
+nohup fswatch -o <span class="hljs-variable">$&#123;ARTICLE_PATH&#125;</span> -l 900 | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span>
+<span class="hljs-keyword">do</span>
+    plog -t -m <span class="hljs-string">"Start deploying..."</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+    hexo g -d &gt;/dev/null  2&gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+    <span class="hljs-keyword">if</span> [ $? -ne 0 ]; <span class="hljs-keyword">then</span>
+        plog -t -l ERROR -c red -m <span class="hljs-string">"Hexo deploy failed."</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+        say <span class="hljs-string">"自动部署博客脚本出现异常"</span>
+
+        button_returned=$(showDialog -t <span class="hljs-string">"auto-blog-submit.sh"</span> -m <span class="hljs-string">"[ERROR] Hexo deploy failed"</span> -b <span class="hljs-string">"View Log,Kill Process,Cancel"</span> -d <span class="hljs-string">","</span>)
+        plog -t -l INFO -c yellow -m <span class="hljs-string">"You choose \033[33m<span class="hljs-variable">$&#123;button_returned&#125;</span>\033[0m"</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+
+        <span class="hljs-comment"># $&#123;button_returned&#125; 加引号防止变量中空格造成影响</span>
+        <span class="hljs-keyword">if</span> [ <span class="hljs-string">"<span class="hljs-variable">$&#123;button_returned&#125;</span>"</span> = <span class="hljs-string">"Cancel"</span> ]; <span class="hljs-keyword">then</span>
+            : <span class="hljs-comment"># Do nothing beyond expanding arguments and performing redirections. The return status is zero.</span>
+        <span class="hljs-keyword">elif</span> [ <span class="hljs-string">"<span class="hljs-variable">$&#123;button_returned&#125;</span>"</span> = <span class="hljs-string">"View Log"</span> ]; <span class="hljs-keyword">then</span>
+            <span class="hljs-comment"># 新建一个iTerm窗口 并执行命令</span>
+            osascript ~/Helper/AppleScript/newTerminalAndRunCMD.scpt <span class="hljs-string">"cd <span class="hljs-variable">$&#123;BLOG_PATH&#125;</span> &amp;&amp; tail <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>"</span>
+        <span class="hljs-keyword">elif</span> [ <span class="hljs-string">"<span class="hljs-variable">$&#123;button_returned&#125;</span>"</span> = <span class="hljs-string">"Kill Process"</span> ]; <span class="hljs-keyword">then</span>
+            pkill -g <span class="hljs-variable">$&#123;PGID&#125;</span>
+            <span class="hljs-keyword">if</span> [ $? -ne 0 ]; <span class="hljs-keyword">then</span>
+                plog -t -l ERROR -c red -m <span class="hljs-string">"pkill -g <span class="hljs-variable">$&#123;PGID&#125;</span> is failed."</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+                showDialog -t <span class="hljs-string">"pkill"</span> -m <span class="hljs-string">"[ERROR] kill process failed."</span> -b <span class="hljs-string">"OK"</span>
+            <span class="hljs-keyword">else</span>
+                plog -t -l OK -c green -m <span class="hljs-string">"pkill -g <span class="hljs-variable">$&#123;PGID&#125;</span> success."</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+                <span class="hljs-built_in">exit</span> 0
+            <span class="hljs-keyword">fi</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span> &amp;</code></pre>
+
+<h4 id="plog-sh"><a href="#plog-sh" class="headerlink" title="plog.sh"></a>plog.sh</h4><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">plog</span></span>()&#123;
+    <span class="hljs-comment"># getopts: https://wiki.bash-hackers.org/howto/getopts_tutorial</span>
+    <span class="hljs-function"><span class="hljs-title">usage</span></span>()&#123;
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">"Usage: plog [-t] [-l level] [-c level_color] [-n level_number] -m message"</span>
+    &#125;
+
+    <span class="hljs-comment"># something must to be init</span>
+    OPTIND=1 <span class="hljs-comment"># The index of params</span>
+    timestamp=<span class="hljs-string">""</span>
+    level=<span class="hljs-string">""</span>
+    level_color=<span class="hljs-string">""</span>
+    level_number=<span class="hljs-string">""</span> <span class="hljs-comment"># log will not echo if level_number &lt; PLOG_LEVEL</span>
+    message=<span class="hljs-string">""</span>
+
+    <span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">"tn:l:c:m:"</span> OPT; <span class="hljs-keyword">do</span>
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"<span class="hljs-variable">$OPT</span>"</span> <span class="hljs-keyword">in</span>
+            t)
+                timestamp=[$(date <span class="hljs-string">"+%Y-%m-%d %H:%M:%S"</span>)];;
+            l)
+                level=[<span class="hljs-variable">$&#123;OPTARG&#125;</span>];;
+            c)
+                level_color=<span class="hljs-variable">$&#123;OPTARG&#125;</span>;;
+            n)
+                level_number=<span class="hljs-variable">$&#123;OPTARG&#125;</span>;;
+            m)
+                message=<span class="hljs-variable">$&#123;OPTARG&#125;</span>;;
+            ?)
+                usage &amp;&amp; <span class="hljs-built_in">return</span> 1;;
+            :)
+                usage &amp;&amp; <span class="hljs-built_in">return</span> 1;;
+        <span class="hljs-keyword">esac</span>
+    <span class="hljs-keyword">done</span>
+
+    <span class="hljs-comment"># []是shell内部命令 [[]]是shell关键字</span>
+    <span class="hljs-comment"># []中一些逻辑符号会被shell解释（比如&gt;解释为重定向符号）但关键字不这样</span>
+    <span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">"<span class="hljs-variable">$message</span>"</span> ]]; <span class="hljs-keyword">then</span>
+        usage &amp;&amp; <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+
+    <span class="hljs-keyword">if</span> [[ -n <span class="hljs-string">"<span class="hljs-variable">$level</span>"</span> &amp;&amp; -n <span class="hljs-variable">$&#123;level_color&#125;</span> ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-keyword">case</span> <span class="hljs-variable">$&#123;level_color&#125;</span> <span class="hljs-keyword">in</span>
+            black|k|黑|30)
+                level=<span class="hljs-string">"\033[30m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            red|r|红|31)
+                level=<span class="hljs-string">"\033[31m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            green|g|绿|32)
+                level=<span class="hljs-string">"\033[32m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            yellow|y|黄|33)
+                level=<span class="hljs-string">"\033[33m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            blue|b|蓝|34)
+                level=<span class="hljs-string">"\033[34m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            purple|p|紫|35)
+                level=<span class="hljs-string">"\033[35m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            cyan|c|青|36)
+                level=<span class="hljs-string">"\033[36m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            white|w|白|37)
+                level=<span class="hljs-string">"\033[37m<span class="hljs-variable">$&#123;level&#125;</span>\033[0m"</span>;;
+            *)
+                plog -l ERROR -c red -m <span class="hljs-string">"Unknown param color <span class="hljs-variable">$&#123;level_color&#125;</span>"</span>
+                <span class="hljs-built_in">return</span> 1;;
+        <span class="hljs-keyword">esac</span>
+    <span class="hljs-keyword">fi</span>
+
+    str_list=(<span class="hljs-string">"<span class="hljs-variable">$&#123;level&#125;</span>"</span> <span class="hljs-string">"<span class="hljs-variable">$&#123;timestamp&#125;</span>"</span>)
+    <span class="hljs-comment"># 字符串数组中若串中带空格 建议用下标取值</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$&#123;!str_list[@]&#125;</span>; <span class="hljs-keyword">do</span>
+        <span class="hljs-keyword">if</span> [[ -n <span class="hljs-string">"<span class="hljs-variable">$&#123;str_list[$i]&#125;</span>"</span> ]]; <span class="hljs-keyword">then</span>
+            message=<span class="hljs-string">"<span class="hljs-variable">$&#123;str_list[$i]&#125;</span> <span class="hljs-variable">$&#123;message&#125;</span>"</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">done</span>
+
+    <span class="hljs-keyword">if</span> [[ -z <span class="hljs-variable">$&#123;level_number&#125;</span> ]]; <span class="hljs-keyword">then</span>
+        level_number=<span class="hljs-variable">$&#123;PLOG_LEVEL&#125;</span>
+    <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$&#123;level_number&#125;</span> -lt <span class="hljs-variable">$&#123;PLOG_LEVEL&#125;</span> ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">return</span> 0
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">"<span class="hljs-variable">$message</span>"</span>
+    <span class="hljs-keyword">fi</span>
+&#125;</code></pre>
+
+<h4 id="showDialog-sh"><a href="#showDialog-sh" class="headerlink" title="showDialog.sh"></a>showDialog.sh</h4><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">showDialog</span></span>()&#123;
+    <span class="hljs-function"><span class="hljs-title">usage</span></span>() &#123;
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">"Usage: showDialog -m message -b button[, button]* [-d delimiters] [-t title]"</span>
+    &#125;
+
+    <span class="hljs-comment"># something must to be init</span>
+    OPTIND=1 <span class="hljs-comment"># The index of params</span>
+    message=<span class="hljs-string">""</span>
+    button=<span class="hljs-string">""</span>
+    delimiters=<span class="hljs-string">" "</span> <span class="hljs-comment"># the defalut delimiters is " "</span>
+    title=<span class="hljs-string">""</span>
+    <span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">"m:b:d:t:"</span> OPT; <span class="hljs-keyword">do</span>
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"<span class="hljs-variable">$OPT</span>"</span> <span class="hljs-keyword">in</span>
+            m)
+                message=<span class="hljs-variable">$&#123;OPTARG&#125;</span>;;
+            b)
+                buttons=<span class="hljs-variable">$&#123;OPTARG&#125;</span>;;
+            d)
+                delimiters=<span class="hljs-variable">$&#123;OPTARG&#125;</span>;;
+            t)
+                title=<span class="hljs-variable">$&#123;OPTARG&#125;</span>;;
+            ?)
+                usage &amp;&amp; <span class="hljs-built_in">return</span> 1;;
+            :)
+                usage &amp;&amp; <span class="hljs-built_in">return</span> 1;;
+        <span class="hljs-keyword">esac</span>
+    <span class="hljs-keyword">done</span>
+
+    required_param_list=(<span class="hljs-string">"m"</span> <span class="hljs-string">"b"</span>)
+    required_value_list=(<span class="hljs-string">"<span class="hljs-variable">$message</span>"</span> <span class="hljs-string">"<span class="hljs-variable">$buttons</span>"</span>)
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$&#123;!required_value_list[@]&#125;</span>; <span class="hljs-keyword">do</span>
+        <span class="hljs-keyword">if</span> [ -z <span class="hljs-string">"<span class="hljs-variable">$&#123;required_value_list[$i]&#125;</span>"</span> ]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">echo</span> <span class="hljs-string">"[ERROR] Missing parameter <span class="hljs-variable">$&#123;required_param_list[$i]&#125;</span>"</span>
+            <span class="hljs-built_in">return</span> 1
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">done</span>
+
+    osascript &lt;&lt;-EndOfScript
+        <span class="hljs-built_in">set</span> AppleScript<span class="hljs-string">'s text item delimiters to "$delimiters"</span>
+<span class="hljs-string">        set btn_list to every text item of "$buttons"</span>
+<span class="hljs-string">        display dialog "$message" buttons btn_list with title "$title"</span>
+<span class="hljs-string">        get the button returned of the result</span>
+<span class="hljs-string">EndOfScript</span>
+<span class="hljs-string">&#125;</span></code></pre>
+
+<h4 id="newTerminalAndRunCMD-scpt"><a href="#newTerminalAndRunCMD-scpt" class="headerlink" title="newTerminalAndRunCMD.scpt"></a>newTerminalAndRunCMD.scpt</h4><pre><code class="hljs bash"><span class="hljs-comment">#!/usr/bin/osascript</span>
+
+on run &#123;<span class="hljs-built_in">command</span>&#125;
+	<span class="hljs-keyword">if</span> application <span class="hljs-string">"iTerm"</span> is running <span class="hljs-keyword">then</span>
+		tell application <span class="hljs-string">"iTerm"</span>
+			create window with default profile
+			tell current session of current window
+				write text <span class="hljs-built_in">command</span>
+			end tell
+		end tell
+	<span class="hljs-keyword">else</span>
+		activate application <span class="hljs-string">"iTerm"</span>
+	end <span class="hljs-keyword">if</span>
+end run</code></pre>
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] Andries Brouwer.The Linux kernel: Process[EB/OL].<a href="https://www.win.tue.nl/~aeb/linux/lk/lk-10.html" target="_blank" rel="noopener">https://www.win.tue.nl/~aeb/linux/lk/lk-10.html</a>, 2003-02-01.</p>
+<p>[2] 老邮局.Linux下Fork与Exec使用[EB/OL].<a href="https://www.cnblogs.com/hicjiajia/archive/2011/01/20/1940154.html" target="_blank" rel="noopener">https://www.cnblogs.com/hicjiajia/archive/2011/01/20/1940154.html</a>, 2011-01-20.</p>
+<p>[3] invalid s.为什么Linux下要把创建进程分为fork()和exec()(一系列函数)两个函数来处理? - invalid s的回答 - 知乎[EB/OL].<a href="https://www.zhihu.com/question/66902460/answer/247277668" target="_blank" rel="noopener">https://www.zhihu.com/question/66902460/answer/247277668</a>, 2017-10-21.</p>
+<p>[4] Michael Kerrisk.The Linux Programming Interface國際中文版[DB/OL].<a href="http://epaper.gotop.com.tw/PDFSample/AXP015900.pdf" target="_blank" rel="noopener">http://epaper.gotop.com.tw/PDFSample/AXP015900.pdf</a>, 2016-10.</p>
+<h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p>Unix与Linux还是有较大的区别，该考虑使用docker了。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/macOS/">macOS</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/09/29/macOS%E9%9D%99%E6%80%81%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">macOS静态编译问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2019/08/19/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E8%84%9A%E6%9C%AC/">
+                        <span class="hidden-mobile">自动部署博客脚本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Linux进程关系&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

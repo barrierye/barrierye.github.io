@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>ProjectEuler - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2017-07-20 10:44">
+                    星期四, 七月 20日 2017, 10:44 上午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>记录下Project Euler上的一些题。</p>
+<a id="more"></a>
+
+<h2 id="Problem-59-XOR-decryption"><a href="#Problem-59-XOR-decryption" class="headerlink" title="Problem 59 : XOR decryption"></a>Problem 59 : XOR decryption</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=59" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h3><p>枚举key的三个字母对密文进行解密。</p>
+<p>猜测原文中空格字符应占最多，故可筛选出若干个文本，人工识别即可。</p>
+<p>find_the_key：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">10000</span>],k,maxspace;
+<span class="hljs-keyword">char</span> ch;
+<span class="hljs-function"><span class="hljs-keyword">void</span>  <span class="hljs-title">decrypt</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> j,<span class="hljs-keyword">int</span> q)</span></span>&#123;
+    <span class="hljs-keyword">int</span> temp=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> t=<span class="hljs-number">0</span>;t&lt;=k;)&#123;
+        <span class="hljs-keyword">if</span>(++t&lt;=k&amp;&amp;(a[t<span class="hljs-number">-1</span>]^i)==<span class="hljs-string">' '</span>)temp++;
+        <span class="hljs-keyword">if</span>(++t&lt;=k&amp;&amp;(a[t<span class="hljs-number">-1</span>]^j)==<span class="hljs-string">' '</span>)temp++;
+        <span class="hljs-keyword">if</span>(++t&lt;=k&amp;&amp;(a[t<span class="hljs-number">-1</span>]^q)==<span class="hljs-string">' '</span>)temp++;
+    &#125;
+    <span class="hljs-keyword">if</span>(temp&gt;=maxspace)&#123;
+        maxspace=temp;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"========================================\n"</span>);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> t=<span class="hljs-number">0</span>;t&lt;=k;)&#123;
+        	<span class="hljs-keyword">if</span>(++t&lt;=k)<span class="hljs-built_in">putchar</span>(a[t<span class="hljs-number">-1</span>]^i);
+        	<span class="hljs-keyword">if</span>(++t&lt;=k)<span class="hljs-built_in">putchar</span>(a[t<span class="hljs-number">-1</span>]^j);
+        	<span class="hljs-keyword">if</span>(++t&lt;=k)<span class="hljs-built_in">putchar</span>(a[t<span class="hljs-number">-1</span>]^q);
+        &#125;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    freopen(<span class="hljs-string">"p059_cipher.txt"</span>,<span class="hljs-string">"r"</span>,<span class="hljs-built_in">stdin</span>);
+    freopen(<span class="hljs-string">"output.txt"</span>,<span class="hljs-string">"w"</span>,<span class="hljs-built_in">stdout</span>);
+    <span class="hljs-keyword">for</span>(;~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c"</span>,&amp;a[k],&amp;ch);++k);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-string">'a'</span>;i&lt;=<span class="hljs-string">'z'</span>;++i)
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-string">'a'</span>;j&lt;=<span class="hljs-string">'z'</span>;++j)
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> q=<span class="hljs-string">'a'</span>;q&lt;=<span class="hljs-string">'z'</span>;++q)
+                decrypt(i,j,q);
+&#125;</code></pre>
+
+<p>get_answer:</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">char</span> a[]=<span class="hljs-string">"(The Gospel of John, chapter 1) 1 In the beginning the Word already existed. He was with God, and he was God. 2 He was in the beginning with God. 3 He created everything there is. Nothing exists that he didn't make. 4 Life itself was in him, and this life gives light to everyone. 5 The light shines through the darkness, and the darkness can never extinguish it. 6 God sent John the Baptist 7 to tell everyone about the light so that everyone might believe because of his testimony. 8 John himself was not the light; he was only a witness to the light. 9 The one who is the true light, who gives light to everyone, was going to come into the world. 10 But although the world was made through him, the world didn't recognize him when he came. 11 Even in his own land and among his own people, he was not accepted. 12 But to all who believed him and accepted him, he gave the right to become children of God. 13 They are reborn! This is not a physical birth resulting from human passion or plan, this rebirth comes from God.14 So the Word became human and lived here on earth among us. He was full of unfailing love and faithfulness. And we have seen his glory, the glory of the only Son of the Father."</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    <span class="hljs-keyword">int</span> sum=<span class="hljs-number">0</span>,len=<span class="hljs-built_in">strlen</span>(a);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;len;++i)sum+=a[i];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,sum);
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-69-Totient-maximum"><a href="#Problem-69-Totient-maximum" class="headerlink" title="Problem 69 : Totient maximum"></a>Problem 69 : Totient maximum</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=69" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p>若$n=\prod_{i=0}^s p_i^{e_i}$是$n$的标准分解式，那么$\varphi (n)=n\prod_{i=0}^s (1-\frac{1}{p_i})$.于是$\frac{n}{\varphi (n)}=\frac{1}{\prod_{i=0}^s (1-\frac{1}{p_i})}$.</p>
+<p>而$p_i$是递增的，故每次贪心取最小的$p_i$可以得到最优解，故$n$为满足$n=\prod_{i=0}^t p_i \leqslant 1000,000$的最大的$n$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100005</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">bool</span> vis[N];
+<span class="hljs-keyword">int</span> p[N],k;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">prime</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;=<span class="hljs-number">100000</span>;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])p[k++]=i;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;i*p[j]&lt;=<span class="hljs-number">100000</span>;++j)&#123;
+            vis[i*p[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    prime();
+    <span class="hljs-keyword">int</span> ans=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;k&amp;&amp;ans*p[i]&lt;=<span class="hljs-number">1000000</span>;++i)ans*=p[i];
+    <span class="hljs-built_in">cout</span>&lt;&lt;ans;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-71-Ordered-fractions"><a href="#Problem-71-Ordered-fractions" class="headerlink" title="Problem 71 : Ordered fractions"></a>Problem 71 : Ordered fractions</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=71" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="法里数列"><a href="#法里数列" class="headerlink" title="法里数列"></a><a href="https://zh.wikipedia.org/zh-hans/**法里數列**" target="_blank" rel="noopener">法里数列</a></h3><p>$n$阶法里数列是$0$和$1$之间最简分数的数列，由小至大排列，每个分数的分母不大于$n$。</p>
+<p>设$F_n$为$n$阶法里数列，则有如下性质：</p>
+<ul>
+<li>$|F_n|=|F_{n-1}|+\varphi (n)$.</li>
+</ul>
+<p>因为$F_n$仅比$F_{n-1}$多了$E={\frac{p}{n}:(p,n)=1}$，其中$|E|=\varphi (n)$。由$|F_1|=2，$可推出$|F_n|=1+\sum_{i=1}^n \varphi(n)$.</p>
+<ul>
+<li>若$\frac{a}{b}$和$\frac{c}{d}$是某$k$阶法里数列的相邻项，且$\frac{a}{b} &lt; \frac{c}{d}$，则它们之差为$\frac{1}{bd}$，也就是说$bc-ad=1$。反之同样成立：若$\frac{a}{b}$，$\frac{c}{d}$均为真分数，且$\frac{a}{b} &lt; \frac{c}{d}$，$bc-ad=1$，则有$\frac{a}{b}$和$\frac{c}{d}$在$k$阶法里数列中是邻项，$k=max{b,d}$.</li>
+<li>若$\frac{a}{b}$和$\frac{c}{d}$是某$k$阶法里数列的相邻项，随着$k$增大，$\frac{a}{b}$和$\frac{c}{d}$间出现的第一项为$\frac{a+c}{b+d}$.</li>
+</ul>
+<p>这里用到了法里数列的第三条性质。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    <span class="hljs-keyword">int</span> a=<span class="hljs-number">2</span>,b=<span class="hljs-number">5</span>;
+    <span class="hljs-keyword">while</span>(b+<span class="hljs-number">7</span>&lt;=<span class="hljs-number">1000000</span>)&#123;
+        a+=<span class="hljs-number">3</span>;
+        b+=<span class="hljs-number">7</span>;
+    &#125;
+    <span class="hljs-built_in">cout</span>&lt;&lt;a;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-77-Prime-summations"><a href="#Problem-77-Prime-summations" class="headerlink" title="Problem 77 : Prime summations"></a>Problem 77 : Prime summations</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=77" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="二分-完全背包计数"><a href="#二分-完全背包计数" class="headerlink" title="二分+完全背包计数"></a>二分+完全背包计数</h3><p>设$n$的分解式的个数为$f(n)$，不难证明$f(n)$为单调函数，故若能较快求出$f(n)$则可用二分解.</p>
+<p>直接分解求分解式的个数并不是很容易，考虑小于等于$n$的素数组合成$n$有多少种方案，于是问题就成了完全背包计数问题，求$f(n)$的复杂度为$O(\frac{n^2}{logn})$.</p>
+<p>总复杂度为$O(n^2)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 100005</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">bool</span> vis[N];
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+ll p[N],k,dp[N];
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">prime</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i&lt;N;++i)&#123;
+        <span class="hljs-keyword">if</span>(!vis[i])p[k++]=i;
+        <span class="hljs-keyword">for</span>(ll j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;p[j]*i&lt;N;++j)&#123;
+            vis[p[j]*i]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%p[j]==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">check</span><span class="hljs-params">(ll n)</span></span>&#123;
+    <span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(dp));dp[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">0</span>;i&lt;k&amp;&amp;p[i]&lt;=n;++i)
+        <span class="hljs-keyword">for</span>(ll j=p[i];j&lt;=n;++j)
+            dp[j]+=dp[j-p[i]];
+    <span class="hljs-keyword">return</span> dp[n];
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    prime();
+    ll l=<span class="hljs-number">1</span>,r=<span class="hljs-number">500</span>;
+    <span class="hljs-keyword">while</span>(l&lt;=r)&#123;
+        ll mid=(l+r)/<span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span>(check(mid)&gt;<span class="hljs-number">5000</span>)r=mid<span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">else</span> l=mid+<span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-built_in">cout</span>&lt;&lt;l;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-79-Passcode-derivation"><a href="#Problem-79-Passcode-derivation" class="headerlink" title="Problem 79 : Passcode derivation"></a>Problem 79 : Passcode derivation</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=79" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><p>将所有keylog（abc）按a-&gt;b-&gt;c建图（由文本文件可知不存在自环），进行拓扑排序。</p>
+<p>注意到可能成环，故先枚举第一个数，测试得第一个数是7时，符合条件的字符串最短。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> x,y,z,deg[<span class="hljs-number">10</span>],k,idx,vis[<span class="hljs-number">10</span>];
+<span class="hljs-keyword">char</span> ans[<span class="hljs-number">20</span>];
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;e[<span class="hljs-number">10</span>];
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    freopen(<span class="hljs-string">"p079_keylog.txt"</span>,<span class="hljs-string">"r"</span>,<span class="hljs-built_in">stdin</span>);
+    <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%1d%1d%1d"</span>,&amp;x,&amp;y,&amp;z))&#123;
+        vis[x]=vis[y]=vis[z]=<span class="hljs-number">1</span>;
+        deg[y]++;deg[z]++;
+        e[x].push_back(y);
+        e[y].push_back(z);
+    &#125;
+    freopen(<span class="hljs-string">"CON"</span>,<span class="hljs-string">"r"</span>,<span class="hljs-built_in">stdin</span>);
+    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;
+        <span class="hljs-keyword">for</span>(idx=<span class="hljs-number">0</span>;idx&lt;<span class="hljs-number">10</span>;++idx)
+            <span class="hljs-keyword">if</span>(deg[idx]==<span class="hljs-number">0</span>&amp;&amp;vis[idx])
+                <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">if</span>(idx&gt;=<span class="hljs-number">10</span>)<span class="hljs-keyword">break</span>;
+        ans[k++]=idx+<span class="hljs-string">'0'</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;(<span class="hljs-keyword">int</span>)e[idx].<span class="hljs-built_in">size</span>();++i)
+            deg[e[idx][i]]--;
+        vis[idx]=<span class="hljs-number">0</span>;
+    &#125;
+    ans[k]=<span class="hljs-string">'\0'</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>,ans);
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-122-Efficient-exponentiation"><a href="#Problem-122-Efficient-exponentiation" class="headerlink" title="Problem 122 : Efficient exponentiation"></a>Problem 122 : Efficient exponentiation</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=122" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p>由快速幂的做法先确定$m(x)$的上界，直接DFS。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">201</span>],path[<span class="hljs-number">15</span>]=&#123;<span class="hljs-number">1</span>&#125;,ans;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">200</span>;++i)&#123;
+        <span class="hljs-keyword">int</span> temp=i;
+        <span class="hljs-keyword">while</span>(temp!=<span class="hljs-number">1</span>)&#123;
+            <span class="hljs-keyword">if</span>(temp&amp;<span class="hljs-number">1</span>)a[i]++;
+            temp&gt;&gt;=<span class="hljs-number">1</span>;
+            a[i]++;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span></span>&#123;
+    <span class="hljs-keyword">if</span>(path[k]&gt;<span class="hljs-number">200</span>||a[path[k]]&lt;k)<span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">if</span>(a[path[k]]&gt;k)a[path[k]]=k;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=k;++i)&#123;
+        path[k+<span class="hljs-number">1</span>]=path[k]+path[i];
+        dfs(k+<span class="hljs-number">1</span>);
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init();
+    dfs(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">200</span>;++i)ans+=a[i];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,ans);
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-123-Prime-square-remainders"><a href="#Problem-123-Prime-square-remainders" class="headerlink" title="Problem 123 : Prime square remainders"></a>Problem 123 : Prime square remainders</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=123" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="二项式定理"><a href="#二项式定理" class="headerlink" title="二项式定理"></a>二项式定理</h3><p>$$<br>\begin{eqnarray}<br> (p_n-1)^n+(p_n+1)^n \equiv (-1)^n+(-1)^{n-1}np+1+np(mod , p_n^2)\<br>\end{eqnarray}<br>$$</p>
+<p>故$n$ 为奇数，化简得：<br>$$<br>\begin{eqnarray}<br> (p_n-1)^n+(p_n+1)^n \equiv 2np(mod , p_n^2)\<br>\end{eqnarray}<br>$$<br>接下来枚举一下就好了，复杂度$O(n)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+ll n=<span class="hljs-number">3</span>,prime[<span class="hljs-number">1000000</span>],isprime[<span class="hljs-number">1000000</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,k;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ll n)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i&lt;n;++i)&#123;
+        <span class="hljs-keyword">if</span>(!isprime[i])prime[k++]=i;
+        <span class="hljs-keyword">for</span>(ll j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;prime[j]*i&lt;n;++j)&#123;
+            isprime[i*prime[j]]=<span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(i%prime[j]==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    init(<span class="hljs-number">1000000</span>);
+    <span class="hljs-keyword">while</span>(n&lt;<span class="hljs-number">1000000</span>&amp;&amp;(<span class="hljs-number">2</span>*n*prime[n<span class="hljs-number">-1</span>]%(prime[n<span class="hljs-number">-1</span>]*prime[n<span class="hljs-number">-1</span>]))&lt;=<span class="hljs-number">1e10</span>)n+=<span class="hljs-number">2</span>;
+    <span class="hljs-built_in">cout</span>&lt;&lt;n;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-131-Prime-cube-partnership"><a href="#Problem-131-Prime-cube-partnership" class="headerlink" title="Problem 131 : Prime cube partnership"></a>Problem 131 : Prime cube partnership</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=131" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="数论"><a href="#数论" class="headerlink" title="数论"></a>数论</h3><p>$\because n^3+n^2p=n^2(n+p)=m^3$</p>
+<p>$\therefore n^2$ 和$n+p$ 均为立方数时，上式成立</p>
+<p>设$x^3=n+p,y^3=n$ ，</p>
+<p>$\therefore p=x^3-y^3=(x-y)(x^2+xy+y^2)$</p>
+<p>$\because p$ 是素数</p>
+<p>$\therefore x-y=1$</p>
+<p>接下来枚举$n$ 即可。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+ll n=<span class="hljs-number">2</span>,ans;
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isprime</span><span class="hljs-params">(ll p)</span></span>&#123;
+    <span class="hljs-keyword">if</span>(p&lt;<span class="hljs-number">2</span>)<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">2</span>;i*i&lt;=p;++i)<span class="hljs-keyword">if</span>(p%i==<span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">cube</span><span class="hljs-params">(ll n)</span></span>&#123;
+    <span class="hljs-keyword">return</span> n*n*n;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    <span class="hljs-keyword">while</span>(cube(n)-cube(n<span class="hljs-number">-1</span>)&lt;<span class="hljs-number">1e6</span>)&#123;
+        <span class="hljs-keyword">if</span>(isprime(cube(n)-cube(n<span class="hljs-number">-1</span>)))
+            ans++;
+        n++;
+    &#125;
+    <span class="hljs-built_in">cout</span>&lt;&lt;ans;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-182-RSA-encryption"><a href="#Problem-182-RSA-encryption" class="headerlink" title="Problem 182 : RSA encryption"></a>Problem 182 : RSA encryption</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=182" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="数论-1"><a href="#数论-1" class="headerlink" title="数论"></a>数论</h3><p>首先考虑对于一个确定的$e$ ，有多少个$x$ 满足$x^e \equiv x(mod , p)$ ，其中$p$ 为一个素数。</p>
+<p>显然有两种情况：</p>
+<ul>
+<li>当$x \equiv 0 (mod , p)$ 时，上述式子成立</li>
+<li>当$x \not\equiv 0(mod , p)$ 时，上述式子等价于$x^{e-1} \equiv 1(mod , p)$ </li>
+</ul>
+<p>我们看第二种情况，因为$p$ 为素数，故一定存在原根$r$ ，令$x=r^t$ 。</p>
+<p>上述式子可以表示为$r^{t(e-1)} \equiv 1(mod , p)$ 。</p>
+<p>由原根的性质，可以得到$ord(r^{(e-1)})=\frac{\varphi(p)}{gcd(\varphi(p),e-1)}$ 。</p>
+<p>故$t$ 在$N_p^*$ 中，有$\frac{\varphi(p)}{ord(r^{(e-1)})}=gcd(p-1,e-1)$ 种不同的取值。</p>
+<p>综上所述，对于一个$e$ ，有$gcd(p-1,e-1)+1$ 个$x$ 满足$x^e\equiv x(mod , p)$ 。</p>
+<p>接下来设$m \equiv x (mod , p) ,m \equiv y (mod , q), n=p \times q$ ，</p>
+<p>则$m^eq \equiv mq (mod , n)$ ，$m^ep \equiv mp (mod , n)$ ，</p>
+<p>所以$m^e(q-p) \equiv m(q-p) (mod , n)$ ，即$m^e \equiv m (mod , n)$ 。</p>
+<p>由中国剩余定理可知，$m \equiv x (mod , p) ,m \equiv y (mod , q)$唯一确定一个$m \equiv qxq^{-1}+pyp^{-1} (mod , n)$ 。</p>
+<p>故对于一个$e$ ，有$[gcd(p-1,e-1)+1]\times [gcd(q-1,e-1)+1]$ 个$m$ 满足$m^e \equiv m(mod ,n)$ 。</p>
+<p>知道这个结论后，遍历一遍$e$ 即可得到答案，复杂度为$O(nlogn)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> ll inf=<span class="hljs-number">100000000000</span>;
+ll p=<span class="hljs-number">1009</span>,q=<span class="hljs-number">3643</span>,e[<span class="hljs-number">4000000</span>];
+ll n=q*p,f=(p<span class="hljs-number">-1</span>)*(q<span class="hljs-number">-1</span>),minx=inf,ans;
+<span class="hljs-function">ll <span class="hljs-title">gcd</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;
+    <span class="hljs-keyword">return</span> b==<span class="hljs-number">0</span>?a:gcd(b,a%b);
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">Min</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;
+    <span class="hljs-keyword">return</span> a&lt;b?a:b;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;f;++i)<span class="hljs-keyword">if</span>(gcd(i,f)==<span class="hljs-number">1</span>)&#123;
+        e[i]=(gcd(i<span class="hljs-number">-1</span>,p<span class="hljs-number">-1</span>)+<span class="hljs-number">1</span>)*(gcd(i<span class="hljs-number">-1</span>,q<span class="hljs-number">-1</span>)+<span class="hljs-number">1</span>);
+        minx=Min(minx,e[i]);
+    &#125;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;f;++i)<span class="hljs-keyword">if</span>(e[i]==minx)
+        ans+=i;
+    <span class="hljs-built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="hljs-string">"\n"</span>;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-250-250250"><a href="#Problem-250-250250" class="headerlink" title="Problem 250 : 250250"></a>Problem 250 : 250250</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=250" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h3><p>预处理$1^1,2^2,3^3,…,250250^{250250}$ 模$250$ 后的值，做01背包即可。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">const</span> ll N=<span class="hljs-number">250250</span>+<span class="hljs-number">5</span>;
+<span class="hljs-keyword">const</span> ll p=<span class="hljs-number">250</span>;
+<span class="hljs-keyword">const</span> ll q=<span class="hljs-number">1e16</span>;
+ll a[N],dp[N][<span class="hljs-number">250</span>];
+<span class="hljs-function">ll <span class="hljs-title">mul</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;<span class="hljs-keyword">return</span> a*b%p;&#125;
+<span class="hljs-function">ll <span class="hljs-title">add</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;<span class="hljs-keyword">return</span> (a+b)%p;&#125;
+<span class="hljs-function">ll <span class="hljs-title">powmod</span><span class="hljs-params">(ll a,ll n)</span></span>&#123;
+    ll r=<span class="hljs-number">1</span>;a%=p;
+    <span class="hljs-keyword">while</span>(n)&#123;
+        <span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>)r=mul(a,r);
+        a=mul(a,a);
+        n&gt;&gt;=<span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> r;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">250250</span>;++i)
+        a[i]=powmod(i,i);
+    dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">250250</span>;++i)&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">250</span>;++j)<span class="hljs-keyword">if</span>(dp[i<span class="hljs-number">-1</span>][j])&#123;
+            dp[i][add(j,a[i])]=(dp[i][add(j,a[i])]+dp[i<span class="hljs-number">-1</span>][j])%q;
+            dp[i][j]=(dp[i][j]+dp[i<span class="hljs-number">-1</span>][j])%q;
+        &#125;
+    &#125;
+    <span class="hljs-built_in">cout</span>&lt;&lt;(dp[<span class="hljs-number">250250</span>][<span class="hljs-number">0</span>]<span class="hljs-number">-1</span>+q)%q;
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="Problem-531-Chinese-leftovers"><a href="#Problem-531-Chinese-leftovers" class="headerlink" title="Problem 531 : Chinese leftovers"></a>Problem 531 : Chinese leftovers</h2><blockquote>
+<p><a href="https://projecteuler.net/problem=531" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<h3 id="数论-2"><a href="#数论-2" class="headerlink" title="数论"></a>数论</h3><p>对于一个同余方程：<br>$$<br>\begin{cases}<br>x \equiv a_1(mod , n_1)\\<br>x \equiv a_2(mod , n_2)<br>\end{cases}\\<br>\begin{eqnarray}<br>&amp;&amp;\therefore x=a_1+k_1n_1=a_2+k_2n_2\\<br>&amp;&amp;\therefore a_1-a_2 \equiv k_2n_2(mod , n_1)<br>\end{eqnarray}<br>$$<br>设$g=gcd(n_1,n_2)$ ，可以得到若方程有解，则$g|(a_1-a_2)$ 必成立；其逆否命题成立。<br>$$<br>\begin{eqnarray}<br>&amp;&amp;\therefore \frac{a_1-a_2}{g} \equiv k_2 \frac{n_2}{g}(mod , \frac{n_1}{g})\\<br>&amp;&amp;\therefore k_2 \equiv \frac{a_1-a_2}{g} (\frac{n_2}{g})^{-1}(mod , \frac{n_1}{g})\\<br>&amp;&amp;\therefore k_2n_2 \equiv \frac{a_1-a_2}{g} (\frac{n_2}{g})^{-1}n_2(mod \frac{n_1n_2}{g})\\<br>&amp;&amp;\therefore x \equiv a_2+k_2n_2 \equiv a_2+\frac{a_1-a_2}{g} (\frac{n_2}{g})^{-1}n_2(mod \frac{n_1n_2}{g})<br>\end{eqnarray}<br>$$<br>复杂度$O(n^2logn)$ 。</p>
+<p>代码如下：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;
+<span class="hljs-keyword">int</span> prime[<span class="hljs-number">1005005</span>],k,isprime[<span class="hljs-number">1005005</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;,phi[<span class="hljs-number">1005005</span>]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;;
+<span class="hljs-function">ll <span class="hljs-title">gcd</span><span class="hljs-params">(ll a,ll b)</span></span>&#123;<span class="hljs-keyword">return</span> b==<span class="hljs-number">0</span>?a:gcd(b,a%b);&#125;
+<span class="hljs-function">ll <span class="hljs-title">add</span><span class="hljs-params">(ll a,ll b,ll p)</span></span>&#123;<span class="hljs-keyword">return</span> (a+b)%p;&#125;
+<span class="hljs-function">ll <span class="hljs-title">mul</span><span class="hljs-params">(ll a,ll b,ll p)</span></span>&#123;<span class="hljs-keyword">return</span> (a*b)%p;&#125;
+<span class="hljs-function">ll <span class="hljs-title">powmod</span><span class="hljs-params">(ll a,ll n,ll p)</span></span>&#123;
+  ll r=<span class="hljs-number">1</span>;
+  <span class="hljs-keyword">while</span>(n)&#123;
+    <span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>)r=mul(r,a,p);
+    a=mul(a,a,p);
+    n&gt;&gt;=<span class="hljs-number">1</span>;
+  &#125;
+  <span class="hljs-keyword">return</span> r;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">inv</span><span class="hljs-params">(ll a,ll n)</span></span>&#123;
+  <span class="hljs-keyword">return</span> powmod(a,phi[n]<span class="hljs-number">-1</span>,n);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;=n;++i)&#123;
+    <span class="hljs-keyword">if</span>(!isprime[i])&#123;
+      phi[i]=i<span class="hljs-number">-1</span>;
+      prime[k++]=i;
+    &#125;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;k&amp;&amp;prime[j]*i&lt;=n;++j)&#123;
+      isprime[prime[j]*i]=<span class="hljs-number">1</span>;
+      <span class="hljs-keyword">if</span>(i%prime[j]==<span class="hljs-number">0</span>)&#123;
+        phi[prime[j]*i]=phi[i]*prime[j];
+        <span class="hljs-keyword">break</span>;
+      &#125;<span class="hljs-keyword">else</span> phi[prime[j]*i]=phi[i]*(prime[j]<span class="hljs-number">-1</span>);
+    &#125;
+  &#125;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">solve</span><span class="hljs-params">(ll n,ll m)</span></span>&#123;
+  <span class="hljs-keyword">if</span>(phi[n]&lt;phi[m])swap(n,m);
+  ll g=gcd(n,m),a1=phi[n],a2=phi[m];
+  <span class="hljs-keyword">if</span>((a1-a2)%g)<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  ll k2=mul((a1-a2)/g%(n/g),inv(m/g,n/g),n/g);
+  <span class="hljs-keyword">return</span> add(k2*m,a2,n*m/g);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;
+  init(<span class="hljs-number">1005000</span>);
+  ll ans=<span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span>(ll i=<span class="hljs-number">1000000</span>;i&lt;<span class="hljs-number">1005000</span>;++i)
+    <span class="hljs-keyword">for</span>(ll j=i+<span class="hljs-number">1</span>;j&lt;<span class="hljs-number">1005000</span>;++j)
+      ans+=solve(i,j);
+  <span class="hljs-built_in">cout</span>&lt;&lt;ans;
+&#125;</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/08/16/HDU%206128%20Inverse%20of%20sum(2017%20Multi-University%20Training%20Contest%20-%20Team%207)/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HDU6128 Inverse of sum(2017 Multi-University Training Contest - Team 7)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2017/06/21/CodeM%E7%BE%8E%E5%9B%A2%E7%82%B9%E8%AF%84%E7%BC%96%E7%A8%8B%E5%A4%A7%E8%B5%9B%E5%88%9D%E8%B5%9BA%E8%BD%AE/">
+                        <span class="hidden-mobile">CodeM美团点评编程大赛初赛A轮</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "ProjectEuler&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

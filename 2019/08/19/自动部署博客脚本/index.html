@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon-48*48.ico">
+  <link rel="icon" type="image/png" href="/img/favicon-48*48.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Record little things in the process of growing up.">
+  <meta name="author" content="barriery">
+  <meta name="keywords" content="">
+  <title>自动部署博客脚本 - barriery&#39;s World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css" />
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>barriery's World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/showtime/">
+              <i class="iconfont icon-dianying"></i>
+              演出</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/todo/">
+              <i class="iconfont icon-todo"></i>
+              清单</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/banner/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2019-08-19 19:22">
+                    星期一, 八月 19日 2019, 7:22 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>前几天刚把博客迁移了过来，顺便更了两篇文章。想着每次写完文章（或者对原来的文章作改动）就要手动部署下有点麻烦，尝试寻找自动更新博客方案。</p>
+<a id="more"></a>
+
+<h1 id="fswatch"><a href="#fswatch" class="headerlink" title="fswatch"></a>fswatch</h1><p>实现自动更新博客关键在于检测文件变动，根据这个思路我找到了<code>fswatch</code>。</p>
+<p><code>fswatch</code>是一个跨平台的文件更改监视器，在指定的文件或目录的内容被改变或修改时会做出通知。<code>man fswatch</code>得到的描述如下：</p>
+<pre><code class="hljs bash">fswatch -- Ask <span class="hljs-keyword">for</span> notification when the contents of the specified files or directory hierarchies are modified.</code></pre>
+
+<p>用brew安装好后，简单使用一下，fswatch的用法是：</p>
+<pre><code class="hljs bash">fswatch (option)* path+</code></pre>
+
+<p>下面demo包含了<code>fswatch</code>监控文件创建，修改与删除操作：</p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g65ebry19hg30k80ba4qq.gif" srcset="/img/loading.gif" alt="fswatch监控文件创建，修改和删除"></p>
+<h1 id="display-dialog"><a href="#display-dialog" class="headerlink" title="display dialog"></a>display dialog</h1><p>若终端脚本在后台运行时出现异常（自动部署失败），不能只是写入日志还需要主动提醒（例如弹窗），在macOS下我找到了AppleScript。</p>
+<p>Applescript是适用于macOS的一种脚本语言，可以用于直接控制macOS上的应用程序，来实现macOS的自动化。这里我用AppleScript中的display dialog来实现弹窗功能：</p>
+<pre><code class="hljs bash"><span class="hljs-comment">#!/usr/bin/env osascript</span>
+
+tell app <span class="hljs-string">"System Events"</span>
+    display dialog <span class="hljs-string">"required dialog text"</span> buttons &#123;<span class="hljs-string">"optional button text 1"</span>, <span class="hljs-string">"optional button text 2"</span>&#125; with title <span class="hljs-string">"optional dialog title text"</span>
+    get the button returned of the result
+end tell</code></pre>
+
+<p>运行上面这个脚本将弹出一个dialog，窗口内容为”required dialog text”，窗口内有两个按钮”optional button text 1”和”optional button text 2”，窗口名为”optional dialog title text”，点击按钮后脚本返回所选按钮的文本。</p>
+<p>AppleScript需要用osascript命令来运行：</p>
+<pre><code class="hljs bash"><span class="hljs-comment"># 方式一:</span>
+osascript applescript.scpt
+<span class="hljs-comment"># 方式二: </span>
+osascript -e <span class="hljs-string">'script command'</span>
+<span class="hljs-comment"># 方式三: 使用heredoc: http://www.tldp.org/LDP/abs/html/here-docs.html, 这种方式可以很好地解决bash到AppleScript的参数传递问题</span>
+osascript &lt;&lt;-<span class="hljs-string">'END'</span>
+script <span class="hljs-built_in">command</span>
+END</code></pre>
+
+
+
+<h1 id="自动部署博客脚本"><a href="#自动部署博客脚本" class="headerlink" title="自动部署博客脚本"></a>自动部署博客脚本</h1><p>利用<code>fswatch</code>和<code>display dialog</code>可以得到如下auto-blog-submit.sh脚本：</p>
+<pre><code class="hljs bash">BLOG_PATH=/Users/barriery/Blog/ <span class="hljs-comment"># your blog root path</span>
+LOG_PATH=<span class="hljs-variable">$&#123;BLOG_PATH&#125;</span>/auto-blog-submit.log
+ARTICLE_PATH=<span class="hljs-variable">$&#123;BLOG_PATH&#125;</span>/<span class="hljs-built_in">source</span>/_posts
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">showDialog</span></span>()&#123;
+osascript -e <span class="hljs-string">'tell app "System Events"</span>
+<span class="hljs-string">display dialog "[ERROR] Hexo deploy failed." buttons &#123;"View Log", "Cancel"&#125; default button "View Log" with title "auto-blog-submit.sh"</span>
+<span class="hljs-string">get the button returned of the result</span>
+<span class="hljs-string">end tell'</span>
+&#125;
+
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;BLOG_PATH&#125;</span> <span class="hljs-comment"># Otherwise the script will run in the home path</span>
+<span class="hljs-keyword">if</span> [ ! -f <span class="hljs-variable">$&#123;LOG_PATH&#125;</span> ]; <span class="hljs-keyword">then</span>
+    touch <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+<span class="hljs-keyword">fi</span>
+
+nohup fswatch -o <span class="hljs-variable">$&#123;ARTICLE_PATH&#125;</span> -l 900 | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span>
+<span class="hljs-keyword">do</span>
+    date <span class="hljs-string">"+%Y-%m-%d %H:%M:%S"</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+    hexo g -d &gt;/dev/null  2&gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+
+    <span class="hljs-keyword">if</span> [ $? -ne 0 ]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">"\033[31m[ERROR]\033[0m Hexo deploy failed."</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+        say <span class="hljs-string">"自动部署博客脚本出现异常"</span>
+
+        botton_returned=$(showDialog)
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">"\033[33m[INFO]\033[0m You choose \033[33m<span class="hljs-variable">$&#123;botton_returned&#125;</span>\033[0m"</span> &gt;&gt; <span class="hljs-variable">$&#123;LOG_PATH&#125;</span>
+
+        <span class="hljs-comment"># $&#123;botton_returned&#125; 加引号防止变量中空格造成影响</span>
+        <span class="hljs-keyword">if</span> [ <span class="hljs-string">"<span class="hljs-variable">$&#123;botton_returned&#125;</span>"</span> = <span class="hljs-string">"Cancel"</span> ]; <span class="hljs-keyword">then</span>
+            : <span class="hljs-comment"># Do nothing beyond expanding arguments and performing redirections. The return status is zero.</span>
+        <span class="hljs-keyword">elif</span> [ <span class="hljs-string">"<span class="hljs-variable">$&#123;botton_returned&#125;</span>"</span> = <span class="hljs-string">"View Log"</span> ]; <span class="hljs-keyword">then</span>
+            open -a Sublime\ Text <span class="hljs-variable">$&#123;LOG_PATH&#125;</span> <span class="hljs-comment"># Using Sublime to open log file.</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span> &amp;</code></pre>
+
+<p>其中，<code>fswatch</code>的<code>-o</code>参数是仅输出监控到的事件数；<code>-l</code>参数指定了潜伏时间，这里结束一次监控后潜伏900秒（默认为1秒）做下一次监控。</p>
+<p>该脚本放监控<code>${BLOG_PATH}/source/_posts</code>中的文件（也就是自己写的文章放置的位置），当文件变动时会将log写入<code>${BLOG_PATH}/auto-blog-submit.log</code>中，并重新部署博客。当脚本出现异常的时候，语音播报”自动部署博客脚本出现异常”，并弹出窗口提示脚本出现异常。</p>
+<h1 id="开机自动运行脚本"><a href="#开机自动运行脚本" class="headerlink" title="开机自动运行脚本"></a>开机自动运行脚本</h1><p>需要开机运行脚本才能使得博客能够一直更新。</p>
+<p>Mac上设置开机自动运行如下：</p>
+<pre><code class="hljs plain">系统偏好设置 -&gt; 用户与群组 -&gt; 当前用户 -&gt; 登录项 -&gt; 添加脚本</code></pre>
+
+<p>同时设置脚本默认打开方式（iTerm或Terminal）并需要给予脚本root权限：</p>
+<pre><code class="hljs bash">chmod 777 auto-blog-submit.sh</code></pre>
+
+
+
+<h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p>刚开始测试脚本的时候，发现开机自动运行会保留终端窗口，所以需要挂在后台运行，用到<code>nohup</code>。</p>
+<p><code>nohup</code>可以让程序始终在后台执行，即使关闭当前的终端或退出账户也能继续执行（而用<code>&amp;</code>关闭终端则会停止运行）。用法：</p>
+<pre><code class="hljs bash">nohup <span class="hljs-built_in">command</span> &amp;</code></pre>
+
+<p>关闭终端后，在另一个终端用<code>jobs</code>已经无法看到后台跑的程序了，此时利用ps进程查看命令：</p>
+<pre><code class="hljs bash">ps -Ao pid,user,start,<span class="hljs-built_in">command</span> | grep <span class="hljs-string">"auto-blog-submit.sh"</span> <span class="hljs-comment"># Linux: ps -aux | grep "auto-blog-submit.sh"</span></code></pre>
+
+<p>找到进程号后，开源用<code>kill</code>杀进程：</p>
+<pre><code class="hljs bash"><span class="hljs-built_in">kill</span> -9 进程号</code></pre>
+
+
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/macOS/">macOS</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Bash/">Bash</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/08/27/Linux%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux进程关系</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2019/08/11/tabnine-vim%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">tabnine-vim插件使用时遇到的一些问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="barrierye/barrierye.github.io"
+          issue-term="pathname"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container custom mx-auto">
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1749089_xconeu0ra98.css">
+      </div>
+    </div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "自动部署博客脚本&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 80,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
