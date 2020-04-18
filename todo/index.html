@@ -173,49 +173,55 @@
 <p>转眼这学期过了大半，很多问题都没有答案，甚至没有方向，慢慢去摸索罢。</p>
 <p>最近还是有一些开心的事，嘻。</p>
 <br>
-<div id="todoHtml">清单在玩躲猫猫游戏喔</div>
+<div id="todoHtml">清单在玩躲猫猫游戏喔（脚本未成功加载）</div>
+
 <script>
 function getTodoHtml(id, url) {
-  var req = false;
-  // Safari, Firefox, 及其他非微软浏览器
-  if (window.XMLHttpRequest) {
-    try {
-      req = new XMLHttpRequest();
-    } catch (e) {
-      req = false;
-    }
-  } else if (window.ActiveXObject) {
-    // For Internet Explorer on Windows
-    try {
-      req = new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (e) {
-      try {
-        req = new ActiveXObject("Microsoft.XMLHTTP");
-      } catch (e) {
-        req = false;
-      }
-    }
-  }
-  var element = document.getElementById(id);
-  if (req) {
-    // 同步请求，等待收到全部内容
-    console.log(url)
-    req.open('GET', url, false);
-    req.send();
-    if (req.status == 200) {
-      element.innerHTML = req.responseText;
+    var element = document.getElementById(id);
+    //console.log(document.location.protocol)
+    if ('https:' == document.location.protocol) {
+        element.innerHTML = '清单暂不支持https访问噢';
     } else {
-      element.innerHTML = '可能出了些问题, 暂时不能加载哦'
+        var req = false;
+        // Safari, Firefox, 及其他非微软浏览器
+        if (window.XMLHttpRequest) {
+            try {
+                req = new XMLHttpRequest();
+            } catch (e) {
+                req = false;
+            }
+        } else if (window.ActiveXObject) {
+            // For Internet Explorer on Windows
+            try {
+                req = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {
+                    req = false;
+                }
+            }
+        }
+        if (req) {
+            // 同步请求，等待收到全部内容
+            req.open('GET', url, false);
+            req.send();
+            if (req.status == 200) {
+                element.innerHTML = req.responseText;
+            } else {
+                element.innerHTML = '可能出了些问题, 暂时不能加载哦'
+            }
+        } else {
+            element.innerHTML =
+                "对不起，你的浏览器不支持" +
+                "XMLHTTPRequest 对象。这个网页的显示要求" +
+                "Internet Explorer 5 以上版本, " +
+                "或 Firefox 或 Safari 浏览器，也可能会有其他可兼容的浏览器存在。";
+        }
     }
-  } else {
-    element.innerHTML =
-      "对不起，你的浏览器不支持" +
-      "XMLHTTPRequest 对象。这个网页的显示要求" +
-      "Internet Explorer 5 以上版本, " +
-      "或 Firefox 或 Safari 浏览器，也可能会有其他可兼容的浏览器存在。";
-  }
 }
-getTodoHtml("todoHtml", 'http://api.barriery.world/todo');
+
+getTodoHtml("todoHtml", "http://api.barriery.world/todo");
 </script>
 
 </div>
