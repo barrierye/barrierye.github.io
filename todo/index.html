@@ -178,7 +178,7 @@
 </div>
 
 <script>
-function getTodoHtml(id, url, orgin) {
+function getTodoHtml(id, url) {
     var element = document.getElementById(id);
     //console.log(document.location.protocol)
     if ('https:' == document.location.protocol) {
@@ -223,8 +223,9 @@ function getTodoHtml(id, url, orgin) {
     }
 }
 
-document.domain = "barriery.world";
-getTodoHtml("todoHtml", "http://api.barriery.world/todo", 'http://api.barriery.world');
+//document.domain = "barriery.world";
+getTodoHtml("todoHtml", "http://49.233.70.188:80/todo");
+//getTodoHtml("todoHtml", "http://api.barriery.world/todo");
 </script>
 
 </div>
