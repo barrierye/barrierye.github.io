@@ -206,7 +206,6 @@ function getTodoHtml(id, url, orgin) {
         }
         if (req) {
             // 同步请求，等待收到全部内容
-            document.domain = "barriery.world";
             req.open('GET', url, false);
             req.send();
             if (req.status == 200) {
@@ -224,6 +223,7 @@ function getTodoHtml(id, url, orgin) {
     }
 }
 
+document.domain = "barriery.world";
 getTodoHtml("todoHtml", "http://api.barriery.world/todo", 'http://api.barriery.world');
 </script>
 
