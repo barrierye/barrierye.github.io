@@ -182,7 +182,7 @@ function getTodoHtml(id, url) {
     var element = document.getElementById(id);
     //console.log(document.location.protocol)
     if ('https:' == document.location.protocol) {
-        element.innerHTML = '清单暂不支持https访问噢';
+        element.innerHTML = '清单暂不支持https访问噢（切换成http访问）';
     } else {
         var req = false;
         // Safari, Firefox, 及其他非微软浏览器
