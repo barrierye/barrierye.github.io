@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>[WIP] pybind11解放Python GIL</title>
+    <link href="/2020/04/18/pybind11%E8%A7%A3%E6%94%BEPython-GIL/"/>
+    <url>/2020/04/18/pybind11%E8%A7%A3%E6%94%BEPython-GIL/</url>
+    
+    <content type="html"><![CDATA[<p>由于GIL(Global Interpreter Lock)，在Python中使用多线程容易遇到 “一核有难多核围观” 的情况，在计算密集场景下Python的多线程基本处于不可用的状态。本文将给出一种解放GIL的方法。</p><a id="more"></a><h2 id="Python的GIL"><a href="#Python的GIL" class="headerlink" title="Python的GIL"></a>Python的GIL</h2><h2 id="规避GIL的几种方法"><a href="#规避GIL的几种方法" class="headerlink" title="规避GIL的几种方法"></a>规避GIL的几种方法</h2><ul><li>使用多进程替代多线程</li><li>异步编程（针对IO密集场景）</li><li>将关键组件用其他语言编写拓展（如使用pybind用C/C++拓展）</li></ul><p>下面介绍最后一种方法。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[WIP] C++11: 右值引用与转移语义</title>
     <link href="/2020/04/15/C-11-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E4%B8%8E%E8%BD%AC%E7%A7%BB%E8%AF%AD%E4%B9%89/"/>
     <url>/2020/04/15/C-11-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E4%B8%8E%E8%BD%AC%E7%A7%BB%E8%AF%AD%E4%B9%89/</url>

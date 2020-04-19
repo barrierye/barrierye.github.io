@@ -178,7 +178,7 @@
 </div>
 
 <script>
-function getTodoHtml(id, url) {
+function getTodoHtml(id, url, orgin) {
     var element = document.getElementById(id);
     //console.log(document.location.protocol)
     if ('https:' == document.location.protocol) {
@@ -206,6 +206,7 @@ function getTodoHtml(id, url) {
         }
         if (req) {
             // 同步请求，等待收到全部内容
+            document.domain = "barriery.world";
             req.open('GET', url, false);
             req.send();
             if (req.status == 200) {
@@ -223,7 +224,7 @@ function getTodoHtml(id, url) {
     }
 }
 
-getTodoHtml("todoHtml", "http://api.barriery.world/todo");
+getTodoHtml("todoHtml", "http://api.barriery.world/todo", 'http://api.barriery.world');
 </script>
 
 </div>
