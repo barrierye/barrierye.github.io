@@ -881,7 +881,7 @@ ll T,n,m,p[N],vis[N]=&#123;<span class="hljs-number">1</span>,<span class="hljs-
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>

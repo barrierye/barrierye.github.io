@@ -453,7 +453,7 @@ mount &#x2F;dev&#x2F;sda1 &#x2F;mnt&#x2F;boot</code></pre>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>

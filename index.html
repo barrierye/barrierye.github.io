@@ -176,7 +176,13 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/18/pybind11%E8%A7%A3%E6%94%BEPython-GIL/" target="_self">
+          <img src="/img/index_img/pybind11-logo.png" srcset="/img/loading.gif" alt="pybind11解放Python GIL">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a class="index-header" href="/2020/04/18/pybind11%E8%A7%A3%E6%94%BEPython-GIL/">pybind11解放Python GIL</a>
 
       <a href="/2020/04/18/pybind11%E8%A7%A3%E6%94%BEPython-GIL/" class="index-excerpt">
@@ -686,7 +692,7 @@
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>

@@ -176,7 +176,13 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2019/08/11/tabnine-vim%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" target="_self">
+          <img src="/img/index_img/tabnine-vim.jpg" srcset="/img/loading.gif" alt="tabnine-vim插件使用时遇到的一些问题">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a class="index-header" href="/2019/08/11/tabnine-vim%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">tabnine-vim插件使用时遇到的一些问题</a>
 
       <a href="/2019/08/11/tabnine-vim%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="index-excerpt">
@@ -729,7 +735,7 @@ E. Arpa and a game with Mojtaba</div>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>

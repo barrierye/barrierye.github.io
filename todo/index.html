@@ -357,7 +357,7 @@ getTodoHtml("todoHtml", "http://49.233.70.188:80/todo");
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
