@@ -381,23 +381,23 @@ priority_queue&lt;ll&gt;q;
 <p>题目大意：给定一颗$n(n \leqslant 10^5)$ 的树，且每个结点上都有$a_i$ 个苹果，每次操作只能将一个结点上的若干个苹果（不能为空）移到它的孩子结点或者将一个孩子结点上的若干个苹果（不能为空）吃掉。现在两人轮流进行操作，后手先将两个不同结点的苹果个数互换后，先手开始操作，直到不能操作为输。问有多少种换苹果的方案，使得先手输。</p>
 </blockquote>
 <h3 id="博弈"><a href="#博弈" class="headerlink" title="博弈"></a>博弈</h3><h4 id="考虑一条链的情况"><a href="#考虑一条链的情况" class="headerlink" title="考虑一条链的情况"></a>考虑一条链的情况</h4><h5 id="当结点数为1时"><a href="#当结点数为1时" class="headerlink" title="当结点数为1时"></a>当结点数为1时</h5><p>该结点上没有苹果时，如下所示：</p>
-<p><img src="/img/_post/cf_417_E/cf_417_1.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/cf_417_E/cf_417_1.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>显然此时$SG$ 值为$0$ 。</p>
 <p>该结点上有$n$ 个苹果时，如下所示：</p>
-<p><img src="/img/_post/cf_417_E/cf_417_2.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/cf_417_E/cf_417_2.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>由于其能转移到$0 \sim n-1$ 的任意状态，故此时$SG$ 值为$n$ 。</p>
 <h5 id="当结点数为2时"><a href="#当结点数为2时" class="headerlink" title="当结点数为2时"></a>当结点数为2时</h5><p>父节点有$n$ 个苹果，孩子上无苹果时，如下图所示：</p>
-<p><img src="/img/_post/cf_417_E/cf_417_3.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/cf_417_E/cf_417_3.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>考虑先手无论从父节点移多少苹果到孩子，后手都将其吃掉，故先手必败，$SG$ 值为$0$ 。</p>
 <h5 id="当结点数为3时"><a href="#当结点数为3时" class="headerlink" title="当结点数为3时"></a>当结点数为3时</h5><p>父节点有$n$ 个苹果，孩子和孙子结点上无苹果时，如下图所示：</p>
-<p><img src="/img/_post/cf_417_E/cf_417_4.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/cf_417_E/cf_417_4.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>若将$n$ 个苹果全部移到孩子结点，则转移到了上面两个结点的状态（$SG=0$），故若设该状态$SG=f(n)$ ，那么$f(n) \geqslant 1$ 。</p>
 <p>将$n-m$ 个苹果移到孩子结点，如图：</p>
-<p><img src="/img/_post/cf_417_E/cf_417_5_.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/cf_417_E/cf_417_5_.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>设该状态$SG=f(m)$ ，而该状态其实是由</p>
-<p><img src="/img/_post/cf_417_E/cf_417_6.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/cf_417_E/cf_417_6.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>和</p>
-<p><img src="/img/_post/cf_417_E/cf_417_7.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/cf_417_E/cf_417_7.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>组合而成的，设前半部分的$SG$ 值为$f(m^{‘})$ ，后半部分的$SG$ 值为$0$ ，故有$f(m)=f(m^{‘}) \oplus  0=f(m^{‘})$ ，其中$\oplus$ 表示异或操作。</p>
 <p>有了上面的结论后，有$f(n)$ 可以转移到$f(m)$ ，故$f(n)=n$ 。</p>
 <h5 id="当结点数为更多时"><a href="#当结点数为更多时" class="headerlink" title="当结点数为更多时"></a>当结点数为更多时</h5><p>父节点有$n$ 个苹果，后继结点上均无苹果时，不难得到：</p>
@@ -480,9 +480,9 @@ priority_queue&lt;ll&gt;q;
                     
                       <a class="hover-with-bg" href="/tags/Codeforces/">Codeforces</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%BC%88/">博弈</a>
-                    
                       <a class="hover-with-bg" href="/tags/%E6%9E%9A%E4%B8%BE/">枚举</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%BC%88/">博弈</a>
                     
                   </div>
                 

@@ -199,14 +199,14 @@
 <p>这种类型的隐写很容易被发现，用winhex打开看一下图片是不是以标准的结束符结尾的。解法也简单，如果发现藏着zip文件，把图片改后缀为zip解压就行了，如果是其他的文件，可以用winhex提取到新的文件里，再进行下一步处理。</p>
 </blockquote>
 <h2 id="思考一"><a href="#思考一" class="headerlink" title="思考一"></a>思考一</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>如果图片是以标准的结束符结尾，但图片中藏着zip文件，如下图所示。</p>
-<p><img src="/img/_post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/%E5%9B%BE%E7%A7%8D_%E6%80%9D%E8%80%83%E4%B8%80.png" srcset="/img/loading.gif" alt="图种_思考一"></p>
+<p><img src="/img/post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/%E5%9B%BE%E7%A7%8D_%E6%80%9D%E8%80%83%E4%B8%80.png" srcset="/img/loading.gif" alt="图种_思考一"></p>
 <p>这种文件结构就不会那么容易被发现。</p>
-<h3 id="实例文件"><a href="#实例文件" class="headerlink" title="实例文件"></a>实例文件</h3><p><img src="/img/_post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/total.jpg" srcset="/img/loading.gif" alt="total"></p>
+<h3 id="实例文件"><a href="#实例文件" class="headerlink" title="实例文件"></a>实例文件</h3><p><img src="/img/post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/total.jpg" srcset="/img/loading.gif" alt="total"></p>
 <h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>用winhex打开看一下图片中是否含有压缩文件的文件头标记（如zip文件的文件头标记为0x504B0304，rar文件的文件头标记为0x52617221），如果存在，则有可能采用了这种拼接方式。</p>
 <h2 id="思考二"><a href="#思考二" class="headerlink" title="思考二"></a>思考二</h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><p>如果生成的jpg文件以1.jpg+2.zip格式生成，而1.jpg文件中包含了zip文件头，如下图所示。</p>
-<p><img src="/img/_post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/%E5%9B%BE%E7%A7%8D_%E6%80%9D%E8%80%83%E4%BA%8C.png" srcset="/img/loading.gif" alt="by_barriery"></p>
+<p><img src="/img/post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/%E5%9B%BE%E7%A7%8D_%E6%80%9D%E8%80%83%E4%BA%8C.png" srcset="/img/loading.gif" alt="by_barriery"></p>
 <p>那么即使知道了拼接方式，也会因为zip文件头匹配错误而导致解压缩失败。</p>
-<h3 id="实例文件-1"><a href="#实例文件-1" class="headerlink" title="实例文件"></a>实例文件</h3><p><img src="/img/_post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/total2.jpg" srcset="/img/loading.gif" alt="by_barriery"></p>
+<h3 id="实例文件-1"><a href="#实例文件-1" class="headerlink" title="实例文件"></a>实例文件</h3><p><img src="/img/post/%E5%9B%BE%E7%A7%8D%E6%80%9D%E8%80%83/total2.jpg" srcset="/img/loading.gif" alt="by_barriery"></p>
 <h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h3><p>辨认出jpg文件中含zip的文件头后，随意更改其中的几个数据，导致该处文件头匹配不成功即可。</p>
 
             </article>
