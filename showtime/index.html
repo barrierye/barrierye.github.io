@@ -179,7 +179,7 @@
 </style>
 <div class="card-columns">
 <div class="card text-center">
-  <img class="card-img-top" src="" sfilename="Supernatural.jpg" bfilename="Supernatural.jpg" srcset="/img/loading.gif" alt="Card image cap">
+  <img class="card-img-top" src="" sfilename="Supernatural.jpg" bfilename="Supernatural.mp4" srcset="/img/loading.gif" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">Supernatural</h5>
     <p class="card-text">Sam好帅（花痴</p>
@@ -219,7 +219,7 @@
 </div>
 
 <div class="card text-center">
-  <img class="card-img-top" src="" sfilename="驴得水.jpg" bfilename="驴得水.jpg" srcset="/img/loading.gif" alt="Card image cap">
+  <img class="card-img-top" src="" sfilename="驴得水.jpg" bfilename="驴得水.mp4" srcset="/img/loading.gif" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">驴得水</h5>
     <p class="card-text">想去看话剧</p>
@@ -280,9 +280,9 @@
 </div>
 
 <div class="card text-center">
-  <img class="card-img-top" src="" sfilename="枪谎言和玫瑰.jpg" bfilename="枪谎言和玫瑰.jpg" srcset="/img/loading.gif" alt="Card image cap">
+  <img class="card-img-top" src="" sfilename="枪谎言和玫瑰.jpg" bfilename="枪谎言与玫瑰.mp4" srcset="/img/loading.gif" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">枪谎言和玫瑰</h5>
+    <h5 class="card-title">枪，谎言和玫瑰</h5>
     <p class="card-text">不仅是那个时代的俄罗斯，很多人大概都没有想过为什么而活罢</p>
   </div>
 </div>
@@ -359,7 +359,7 @@
 </div>
 
 <div class="card text-center">
-  <img class="card-img-top" src="" sfilename="被遗忘的归于尘土.jpg" bfilename="被遗忘的归于尘土.jpg" srcset="/img/loading.gif" alt="Card image cap">
+  <img class="card-img-top" src="" sfilename="被遗忘的归于尘土.jpg" bfilename="被遗忘的归于尘土.mp4" srcset="/img/loading.gif" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">被遗忘的归于尘土</h5>
     <p class="card-text">灾难中的人们像木偶一样活着</p>
@@ -367,7 +367,7 @@
 </div>
 
 <div class="card text-center">
-  <img class="card-img-top" src="" sfilename="明天之前.jpg" bfilename="明天之前.jpg" srcset="/img/loading.gif" alt="Card image cap">
+  <img class="card-img-top" src="" sfilename="明天之前.jpg" bfilename="明天之前.mp4" srcset="/img/loading.gif" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">明天之前</h5>
     <p class="card-text">明天永远都会变成今天</p>
@@ -375,10 +375,10 @@
 </div>
 
 <div class="card text-center">
-  <img class="card-img-top" src="" sfilename="哪吒之魔童降世.jpg" bfilename="哪吒之魔童降世.jpg" srcset="/img/loading.gif" alt="Card image cap">
+  <img class="card-img-top" src="" sfilename="哪吒之魔童降世.jpg" bfilename="哪吒之魔童降世.mp4" srcset="/img/loading.gif" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">哪吒之魔童降世</h5>
-    <p class="card-text">"别挣扎了，这都是命"</p>
+    <p class="card-text">"别挣扎了，这是命中注定"</p>
   </div>
 </div>
 
@@ -528,8 +528,8 @@ $(".card-columns img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(
   function () {
     var element = document.createElement("a");
     $(element).attr("data-fancybox", "");
-    $(element).attr("href", "https://showtime-1251781355.cos.ap-beijing.myqcloud.com/" + "/" + $(this).attr("bfilename"));
-    $(this).attr("src", "small" + "/" + $(this).attr("sfilename")) + "/" + "Copyright";
+    $(element).attr("href", "https://showtime-1251781355.cos.ap-beijing.myqcloud.com/" + "/" + $(this).attr("bfilename")) + "/" + "Copyright";
+    $(this).attr("src", "small" + "/" + $(this).attr("sfilename"));
     $(this).wrap(element);
   }
 );
