@@ -369,11 +369,11 @@
       
       <tag>Codeforces</tag>
       
+      <tag>博弈</tag>
+      
       <tag>思维</tag>
       
       <tag>调和级数</tag>
-      
-      <tag>博弈</tag>
       
     </tags>
     
@@ -631,9 +631,9 @@
       
       <tag>DP</tag>
       
-      <tag>二分</tag>
-      
       <tag>模拟</tag>
+      
+      <tag>二分</tag>
       
       <tag>莫队</tag>
       
@@ -851,15 +851,15 @@
       
       <tag>DP</tag>
       
-      <tag>二分</tag>
+      <tag>Codeforces</tag>
       
       <tag>模拟</tag>
       
-      <tag>Codeforces</tag>
+      <tag>枚举</tag>
+      
+      <tag>二分</tag>
       
       <tag>博弈</tag>
-      
-      <tag>枚举</tag>
       
     </tags>
     
@@ -911,9 +911,9 @@
       
       <tag>DP</tag>
       
-      <tag>模拟</tag>
-      
       <tag>Codeforces</tag>
+      
+      <tag>模拟</tag>
       
       <tag>树状数组</tag>
       

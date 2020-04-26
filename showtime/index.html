@@ -528,8 +528,8 @@ $(".card-columns img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(
   function () {
     var element = document.createElement("a");
     $(element).attr("data-fancybox", "");
-    $(element).attr("href", "big" + "/" + $(this).attr("bfilename"));
-    $(this).attr("src", "small" + "/" + $(this).attr("sfilename"));
+    $(element).attr("href", "https://showtime-1251781355.cos.ap-beijing.myqcloud.com/" + "/" + $(this).attr("bfilename"));
+    $(this).attr("src", "small" + "/" + $(this).attr("sfilename")) + "/" + "Copyright";
     $(this).wrap(element);
   }
 );
