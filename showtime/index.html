@@ -536,6 +536,63 @@ $(".card-columns img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(
 </script>
 
 
+<br>
+
+<h2 id="近期看点"><a href="#近期看点" class="headerlink" title="近期看点"></a>近期看点</h2><div id="showtimeHtml">
+showtime在玩躲猫猫游戏喔(脚本未成功加载)
+</div>
+
+<script>
+function getTodoHtml(id, url) {
+    var element = document.getElementById(id);
+    //console.log(document.location.protocol)
+    if ('https:' == document.location.protocol) {
+        element.innerHTML = 'showtime暂不支持https访问噢（切换成http访问）';
+    } else {
+        var req = false;
+        // Safari, Firefox, 及其他非微软浏览器
+        if (window.XMLHttpRequest) {
+            try {
+                req = new XMLHttpRequest();
+            } catch (e) {
+                req = false;
+            }
+        } else if (window.ActiveXObject) {
+            // For Internet Explorer on Windows
+            try {
+                req = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {
+                    req = false;
+                }
+            }
+        }
+        if (req) {
+            // 同步请求，等待收到全部内容
+            req.open('GET', url, false);
+            req.send();
+            if (req.status == 200) {
+                element.innerHTML = req.responseText;
+            } else {
+                element.innerHTML = '可能出了些问题, 暂时不能加载哦'
+            }
+        } else {
+            element.innerHTML =
+                "对不起，你的浏览器不支持" +
+                "XMLHTTPRequest 对象。这个网页的显示要求" +
+                "Internet Explorer 5 以上版本, " +
+                "或 Firefox 或 Safari 浏览器，也可能会有其他可兼容的浏览器存在。";
+        }
+    }
+}
+
+//document.domain = "barriery.world";
+getTodoHtml("showtimeHtml", "http://49.233.70.188:80/showtime");
+//getTodoHtml("showtimeHtml", "http://api.barriery.world/showtime");
+</script>
+
 </div>
 
               </div>
