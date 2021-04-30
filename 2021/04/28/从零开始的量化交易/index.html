@@ -229,9 +229,9 @@
 <td align="center">1984.20</td>
 </tr>
 <tr>
-<td align="center">2021.04.29 21:28</td>
-<td align="center">8.5</td>
-<td align="center">2048.80</td>
+<td align="center">2021.04.30 10:27</td>
+<td align="center">9</td>
+<td align="center">2063.68</td>
 </tr>
 <tr>
 <td align="center">-</td>
@@ -296,13 +296,13 @@ def main():
 <p>因为对金融指标完全不了解，所以找到了网格交易策略。这是一种对新手相当友好的策略，只需要设定好几个参数就可以！<a href="https://www.vnpy.com/docs/cn/algo_trader.html#id14" target="_blank" rel="noopener">vnpy文档</a>对网格算法描述如下：</p>
 <ol>
 <li>基于<code>网格大小</code>（价格步进）计算 <code>目标格数</code>，<code>目标格数 = (上界价格 - 当前价格) / 网格大小</code></li>
-<li>计算 <code>目标仓位</code>，<code>目标仓位 = 取整后的目标格数 * 每格委托数量</code>。注意卖卖方向取整的方式是不同的：买入方向向下取整（floor）；卖出方向要向上取整（ceil）</li>
+<li>计算 <code>目标仓位</code>，<code>目标仓位 = 取整后的目标格数 * 每格委托数量</code>。注意买卖方向取整的方式是不同的：买入方向向下取整（floor）；卖出方向要向上取整（ceil）</li>
 <li>根据 <code>目标仓位</code> 执行操作。若目标仓位大于当前仓位，执行买入操作；若目标仓位低于当前仓位，执行卖出操作</li>
 </ol>
 <p>选好币，凭感觉设定好<strong>价格上界</strong>，根据15min价格浮动设定好<strong>网格大小</strong>（计划15min一次操作，单次利率虽少但次数多），根据目测的价格下界设定好<strong>每格委托数量</strong>，就开始执行策略！</p>
 <p>然而开始量化的第三天，遇到大跌行情，资产一度折损到 1300USDT，跌去 30%。这让我意识到网格策略的局限性：无法应对单边跌和单边涨的情况，故考虑对其进行改进。</p>
 <h2 id="0x03-改进的网格策略-2021-04-24"><a href="#0x03-改进的网格策略-2021-04-24" class="headerlink" title="0x03 改进的网格策略 @2021.04.24"></a>0x03 改进的网格策略 @2021.04.24</h2><p>主要考虑的是单边跌，毕竟踏空不要紧，但不能跌去本金。</p>
-<h3 id="单边跌"><a href="#单边跌" class="headerlink" title="单边跌"></a>单边跌</h3><p>考虑跌倒一定程度，对网格策略的网格大小进行扩展。</p>
+<h3 id="单边下跌行情"><a href="#单边下跌行情" class="headerlink" title="单边下跌行情"></a>单边下跌行情</h3><p>考虑跌倒一定程度，对网格策略的网格大小进行扩展/伸缩。</p>
 <ol>
 <li>用网格<code>上界价格</code>（price）初始化<code>浮动上界</code>（ceil），根据 <code>扩展阈值百分比</code> 计算出 <code>扩展阈值</code>， <code>扩展阈值 = 浮动上界 * (1 - 扩展阈值百分比)</code></li>
 <li>根据当前价格大小关系做扩展/收缩操作：<ol>
@@ -314,12 +314,12 @@ def main():
 </ol>
 <p>进行扩展操作后，通常 <code>目标仓位</code> 会下降，以低价卖出一部分仓位来回收资金；而进行收缩操作后，<code>目标仓位</code>会增加，在稍高点重新建立仓位，期望后续增长。</p>
 <p>但这样一来，短时间内扩展、收缩来回操作会损耗大量资金。为了避免反复横跳，设置一个 <code>冷静时间</code>，即在扩展（收缩）操作后需要等一段时间后才允许进行收缩（扩展）操作。</p>
-<h3 id="单边涨"><a href="#单边涨" class="headerlink" title="单边涨"></a>单边涨</h3><p>为了应对单边涨行情，上调各种阈值。</p>
+<h3 id="单边上涨行情"><a href="#单边上涨行情" class="headerlink" title="单边上涨行情"></a>单边上涨行情</h3><p>为了应对单边涨行情，上调各种阈值。</p>
 <ol>
 <li>当前价格高于 <code>上界价格</code> （price）时，考虑上调阈值：<code>上界价格 = 当前价格 * (1 + 扩展阈值百分比 / 2)</code>， <code>扩展阈值 = 上界价格 * (1 - 扩展阈值百分比)</code>， <code>浮动上界 = 上界价格</code></li>
 <li>执行Naive网格策略</li>
 </ol>
-<p>为了防止短时间疯涨回落，在上调前也等待一个 <code>等待时间</code>。</p>
+<p>为了防止短时间疯涨回落，在上调前也等待一个 <code>冷静时间</code>。</p>
 <h2 id="0x04-后续计划"><a href="#0x04-后续计划" class="headerlink" title="0x04 后续计划"></a>0x04 后续计划</h2><p>计划参考 <a href="https://tianzhuqin.github.io/assets/work/Tianzhu_Qin_AI_Stock-Market-Trading.html" target="_blank" rel="noopener">Stock Market Trading Strategy Research – Hire an AI to make you money!</a> 用机器学习方法进行尝试。</p>
 
             </article>
